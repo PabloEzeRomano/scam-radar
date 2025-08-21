@@ -23,7 +23,19 @@
         "item2": "Encoded Strings & Dynamic Execution",
         "item2Desc": "Base64 strings decoding to external URLs, or dynamic execution like new Function() pulling code from the network.",
         "item3": "Lack of Credibility",
-        "item3Desc": "No company domain, no real GitHub org history, no deployed demo, or dramatic stories with urgency to pressure you."
+        "item3Desc": "No company domain, no real GitHub org history, no deployed demo, or dramatic stories with urgency to pressure you.",
+        "item4": "Ghost Recruiters & Vanishing Profiles",
+        "item4Desc": "Recruiters with almost no connections, fake companies, or accounts that disappear the next day.",
+        "item5": "Too-Good-To-Be-True Offers",
+        "item5Desc": "Unusually high pay or rushed processes with little to no interviews or technical validation.",
+        "item6": "Unusual Technical Tests",
+        "item6Desc": "Requests to run code locally or to fix a repo 'as a test' (often unpaid work or a vector for malware).",
+        "item7": "Suspicious Repos",
+        "item7Desc": "Includes node_modules/binaries in the repo, tons of filler, single-commit history, code that won't run.",
+        "item8": "Cloned Companies & Impersonation",
+        "item8Desc": "Duplicate or spoofed company pages and staff profiles with inconsistent or impossible timelines.",
+        "item9": "Crypto-Specific Lures",
+        "item9Desc": "'Fix a quick bug' in a wallet/contract repo, attempts to scan keys or exfiltrate wallet data."
       },
       "advice": {
         "title": "Safe Practices",
@@ -33,7 +45,19 @@
         "item2": "Verify Sources",
         "item2Desc": "Check company domain, repo/org history, live demo, and LinkedIn profiles of the team.",
         "item3": "Trust Your Gut",
-        "item3Desc": "If it feels off, stop and double-check. Ask for proof like contract addresses on explorers or real commit history."
+        "item3Desc": "If it feels off, stop and double-check. Ask for proof like contract addresses on explorers or real commit history.",
+        "item4": "Use Containers or VMs",
+        "item4Desc": "Test unknown code in a container/VM. Disable shared folders and host integration.",
+        "item5": "Clean Dependencies",
+        "item5Desc": "Delete bundled node_modules, reinstall from a trusted lockfile. Treat lockfiles with caution.",
+        "item6": "Static & AV Scans",
+        "item6Desc": "Check URLs/files with VirusTotal and run security scans (npm audit/Snyk) before executing anything.",
+        "item7": "Prefer Safe Evaluation Environments",
+        "item7Desc": "Legit companies use live coding or hosted platforms instead of asking you to run unknown code locally.",
+        "item8": "Report & Share",
+        "item8Desc": "Report suspicious repos/profiles and share signals with the community to protect others.",
+        "item9": "Cross-Check Credibility",
+        "item9Desc": "Verify tenure vs company age, look for real commit history, and avoid sharing sensitive info."
       },
       "cta": {
         "title": "Help Keep the Community Safe",
@@ -196,7 +220,19 @@
         "item2": "Cadenas Codificadas y Ejecución Dinámica",
         "item2Desc": "Cadenas Base64 que decodifican a URLs externas, o ejecución dinámica como new Function() cargando código de la red.",
         "item3": "Falta de Credibilidad",
-        "item3Desc": "Sin dominio de empresa, sin historial real en GitHub, sin demo desplegada o historias dramáticas con urgencia para apurarte."
+        "item3Desc": "Sin dominio de empresa, sin historial real en GitHub, sin demo desplegada o historias dramáticas con urgencia para apurarte.",
+        "item4": "Reclutadores Fantasma y Perfiles que Desaparecen",
+        "item4Desc": "Perfiles con muy pocos contactos, empresas inventadas o cuentas que desaparecen al día siguiente.",
+        "item5": "Ofertas Demasiado Buenas",
+        "item5Desc": "Sueldos altos o procesos exprés sin entrevistas ni validaciones técnicas reales.",
+        "item6": "Pruebas Técnicas Inusuales",
+        "item6Desc": "Pedir que corras código en local o 'arreglar un repo' como prueba (trabajo gratis o puerta a malware).",
+        "item7": "Repos Sospechosos",
+        "item7Desc": "Incluyen node_modules/binarios, mucho relleno, un solo commit, código que no corre.",
+        "item8": "Empresas Clonadas e Impersonaciones",
+        "item8Desc": "Páginas duplicadas o falsas y perfiles con líneas de tiempo imposibles o inconsistentes.",
+        "item9": "Señuelos de Crypto",
+        "item9Desc": "'Arreglar un bug' en repo de wallet/contrato, intentos de escanear llaves o robar datos de billeteras."
       },
       "advice": {
         "title": "Prácticas Seguras",
@@ -206,7 +242,19 @@
         "item2": "Verifica las Fuentes",
         "item2Desc": "Comprueba el dominio de la empresa, historial del repo/org, demo en vivo y perfiles de LinkedIn del equipo.",
         "item3": "Confía en tu Instinto",
-        "item3Desc": "Si algo se siente raro, pausa y verifica. Pide pruebas como contratos en exploradores o historial real de commits."
+        "item3Desc": "Si algo se siente raro, pausa y verifica. Pide pruebas como contratos en exploradores o historial real de commits.",
+        "item4": "Usa Contenedores o VMs",
+        "item4Desc": "Prueba código desconocido en contenedor/VM. Desactiva carpetas compartidas e integración con el host.",
+        "item5": "Limpia Dependencias",
+        "item5Desc": "Borra node_modules incluidos y reinstala desde un lockfile confiable. Desconfía de lockfiles dudosos.",
+        "item6": "Escaneos Estáticos y Antivirus",
+        "item6Desc": "Verifica URLs/archivos con VirusTotal y corre auditorías (npm audit/Snyk) antes de ejecutar nada.",
+        "item7": "Entornos de Evaluación Seguros",
+        "item7Desc": "Empresas serias usan live coding o plataformas alojadas, no te piden correr código desconocido en local.",
+        "item8": "Reporta y Comparte",
+        "item8Desc": "Denuncia repos/perfiles sospechosos y comparte señales con la comunidad para proteger a otros.",
+        "item9": "Verifica la Credibilidad",
+        "item9Desc": "Contrasta antigüedad vs edad de la empresa, busca historial real de commits y no compartas info sensible."
       },
       "cta": {
         "title": "Ayuda a Mantener la Comunidad Segura",
