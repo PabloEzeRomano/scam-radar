@@ -13,7 +13,7 @@ import {
   DocumentData,
 } from 'firebase/firestore';
 import { db } from './config';
-import { COLLECTIONS, User, NewUser, Report, NewReport } from './models';
+import { COLLECTIONS, User, NewUser, Report, NewReport, Suggestion, NewSuggestion } from './models';
 
 // Helper function to convert Firestore timestamp to Date
 const convertTimestamps = (data: DocumentData) => {
@@ -170,5 +170,22 @@ export const reportServices = {
     }
 
     return reports;
+  },
+};
+
+// Suggestion services
+export const suggestionServices = {
+  async createSuggestion(suggestionData: NewSuggestion): Promise<Suggestion> {
+    if (!isFirebaseReady()) {
+      throw new Error('Firebase not initialized');
+    }
+
+    const docRef = await addDoc(collection(db!, COLLECTIONS.SUGGESTIONS), {
+      ...suggestionData,
+      createdAt: new Date(),
+    });
+
+    const doc = await getDoc(docRef);
+    return { id: doc.id, ...convertTimestamps(doc.data()!) } as Suggestion;
   },
 };

@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import { Geist, Geist_Mono, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
+import { LocaleDetector } from "@/components/LocaleDetector";
 import { Navigation } from "@/components/Navigation";
 
 const geistSans = Geist({
@@ -11,6 +12,12 @@ const geistSans = Geist({
 const geistMono = Geist_Mono({
   variable: "--font-geist-mono",
   subsets: ["latin"],
+});
+
+const jetBrainsMono = JetBrains_Mono({
+  variable: '--font-jet-brains-mono',
+  subsets: ['latin'],
+  weight: ['400'],
 });
 
 export const metadata: Metadata = {
@@ -26,10 +33,12 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        className={`${jetBrainsMono.variable} antialiased`}
       >
-        <Navigation />
-        {children}
+        <LocaleDetector>
+          <Navigation />
+          {children}
+        </LocaleDetector>
       </body>
     </html>
   );

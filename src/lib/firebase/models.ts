@@ -29,6 +29,7 @@ export interface Report {
 export type NewReport = Omit<Report, 'createdAt'>;
 
 export interface Suggestion {
+  id?: string;
   userId: string;
   message: string;
   createdAt: Date;
@@ -42,31 +43,3 @@ export const COLLECTIONS = {
   REPORTS: 'reports',
   SUGGESTIONS: 'suggestions',
 } as const;
-
-// types/firestore.ts
-
-
-export interface UserDoc {
-  email?: string;         // uno de email | linkedin es requerido a nivel app
-  linkedin?: string;
-  name?: string;
-  expertise?: string;     // "Frontend dev", "PM", etc
-  createdAt: number;      // Date.now()
-}
-
-export interface ReportDoc {
-  type: ReportType;
-  title?: string;         // si falta, se deriva de la URL
-  url: string;
-  platform: string;       // auto-detectado (editable)
-  reason: string;
-  reporterId: string;     // ref a users/{id}
-  status: ReportStatus;   // default 'pending'
-  createdAt: number;
-}
-
-export interface SuggestionDoc {
-  userId: string;
-  message: string;
-  createdAt: number;
-}
