@@ -1,0 +1,348 @@
+{
+  "en": {
+    "nav": {
+      "home": "Home",
+      "reports": "Reports",
+      "submit": "Submit",
+      "about": "About",
+      "contact": "Contact",
+      "switchToSpanish": "Switch to Spanish",
+      "switchToEnglish": "Switch to English"
+    },
+    "home": {
+      "title": "Scam Radar",
+      "subtitle": "Community-driven scam reports to help you stay safe online",
+      "description": "Join a growing community that protects the internet by reporting and sharing suspicious projects, fake profiles, and potential scams.",
+      "ctaBrowse": "Browse Reports",
+      "ctaSubmit": "Submit a Report",
+      "redFlags": {
+        "title": "Red Flags to Watch",
+        "subtitle": "Warning signs that should make you pause and investigate",
+        "item1": "Suspicious Code Patterns",
+        "item1Desc": "Repos with only one commit, ghost accounts, placeholder code, or requests to run code locally before any live demo.",
+        "item2": "Encoded Strings & Dynamic Execution",
+        "item2Desc": "Base64 strings decoding to external URLs, or dynamic execution like new Function() pulling code from the network.",
+        "item3": "Lack of Credibility",
+        "item3Desc": "No company domain, no real GitHub org history, no deployed demo, or dramatic stories with urgency to pressure you."
+      },
+      "advice": {
+        "title": "Safe Practices",
+        "subtitle": "Follow these guidelines to avoid scams",
+        "item1": "Never Run Unknown Code",
+        "item1Desc": "Review code in a safe environment (container/VM) before executing anything locally.",
+        "item2": "Verify Sources",
+        "item2Desc": "Check company domain, repo/org history, live demo, and LinkedIn profiles of the team.",
+        "item3": "Trust Your Gut",
+        "item3Desc": "If it feels off, stop and double-check. Ask for proof like contract addresses on explorers or real commit history."
+      },
+      "cta": {
+        "title": "Help Keep the Community Safe",
+        "subtitle": "Report suspicious activity and browse approved scam reports"
+      }
+    },
+    "reports": {
+      "title": "Scam Reports",
+      "subtitle": "Browse reports of suspicious activity submitted by the community",
+      "loading": "Loading reports...",
+      "noResults": "No reports found matching your criteria.",
+      "untitled": "Untitled",
+      "platform": "Platform",
+      "unknown": "Unknown",
+      "whySuspicious": "Why suspicious?",
+      "types": {
+        "project": "Project",
+        "profile": "Profile",
+        "company": "Company"
+      },
+      "statuses": {
+        "pending": "Pending",
+        "approved": "Approved",
+        "rejected": "Rejected"
+      }
+    },
+    "filters": {
+      "filterByType": "Filter by Type",
+      "allTypes": "All Types",
+      "projects": "Projects",
+      "profiles": "Profiles",
+      "companies": "Companies",
+      "searchReports": "Search Reports",
+      "searchPlaceholder": "Search by title or URL..."
+    },
+    "submit": {
+      "title": "Submit a Scam Report",
+      "subtitle": "Help protect the community by reporting suspicious activity",
+      "form": {
+        "type": "Type",
+        "selectType": "Select a type",
+        "url": "URL",
+        "urlPlaceholder": "https://example.com",
+        "title": "Title",
+        "titlePlaceholder": "Will be auto-filled from the URL if left empty",
+        "platform": "Platform",
+        "platformPlaceholder": "Will be auto-filled from the URL",
+        "reason": "Why is this suspicious?",
+        "reasonPlaceholder": "Describe the suspicious activity, red flags, or concerns...",
+        "contactInfo": "Your Contact Information",
+        "contactInfoDesc": "We require at least one contact (email or LinkedIn) to verify reports.",
+        "email": "Email",
+        "emailPlaceholder": "your.email@example.com",
+        "linkedin": "LinkedIn URL",
+        "linkedinPlaceholder": "https://linkedin.com/in/yourprofile",
+        "name": "Name",
+        "namePlaceholder": "Your name",
+        "expertise": "Expertise/Role",
+        "expertisePlaceholder": "e.g., Frontend dev, PM, Security researcher",
+        "submit": "Submit Report",
+        "submitting": "Submitting..."
+      },
+      "validation": {
+        "typeRequired": "Type is required",
+        "urlRequired": "URL is required",
+        "urlInvalid": "Please enter a valid URL",
+        "reasonRequired": "Reason is required",
+        "contactRequired": "Either email or LinkedIn URL is required",
+        "submissionFailed": "Submission failed. Please try again."
+      },
+      "success": {
+        "title": "Thank You!",
+        "message": "We'll review your report before publishing. You'll be notified if it’s approved.",
+        "browseReports": "Browse Reports"
+      }
+    },
+    "about": {
+      "title": "About Scam Radar",
+      "subtitle": "Our mission and guidelines to keep the community safe",
+      "mission": "Our Mission",
+      "missionText": "Scam Radar is a community-driven platform to help developers, investors, and professionals identify and avoid suspicious online activities. We believe collective vigilance is the best defense against scams, fraud, and malicious actors.",
+      "howItWorks": "How It Works",
+      "howItWorksText": "Community members submit reports of suspicious projects, profiles, or companies. Each submission is reviewed for accuracy and relevance before publication. Only approved reports are made public to ensure quality and reliability.",
+      "submissionGuidelines": "Submission Guidelines",
+      "guidelines": {
+        "specific": "Be specific",
+        "specificDesc": "Provide clear details about what makes it suspicious",
+        "evidence": "Include evidence",
+        "evidenceDesc": "Share URLs, screenshots, or concrete examples when possible",
+        "factual": "Stay factual",
+        "factualDesc": "Focus on observable red flags, not personal opinions",
+        "contact": "Contact required",
+        "contactDesc": "We require either an email or LinkedIn profile to verify submissions"
+      },
+      "whatWeLookFor": "What We Look For",
+      "lookFor": {
+        "codePatterns": "Suspicious code patterns or requests to run untrusted code",
+        "encodedStrings": "Encoded strings decoding to external URLs",
+        "missingInfo": "Missing company info or fake credentials",
+        "dramaticStories": "Dramatic stories with urgency to push decisions",
+        "sensitiveInfo": "Requests for sensitive info or unusual access"
+      },
+      "privacyEthics": "Privacy & Ethics",
+      "privacyEthicsText": "We take privacy seriously. Reporter information is confidential and used only for verification. We do not share personal details with third parties. Our goal is to protect the community while respecting privacy and ethics.",
+      "disclaimer": "Disclaimer",
+      "disclaimerText": "Scam Radar provides information for educational and awareness purposes only. Reports here are not legal advice or definitive proof of fraud. Always do your own research before making decisions. We are not responsible for actions taken based on this information."
+    },
+    "contact": {
+      "title": "Contact & Suggestions",
+      "subtitle": "We’d love your feedback and ideas",
+      "description": "Help us improve Scam Radar by sharing feedback, reporting bugs, suggesting features, or flagging false positives. Your input makes the platform better for everyone.",
+      "form": {
+        "name": "Name",
+        "namePlaceholder": "Your name",
+        "email": "Email",
+        "emailPlaceholder": "your.email@example.com",
+        "linkedin": "LinkedIn Profile",
+        "linkedinPlaceholder": "https://linkedin.com/in/yourprofile",
+        "message": "Message",
+        "messagePlaceholder": "Share feedback, suggestions, or report an issue...",
+        "submit": "Send Message",
+        "submitting": "Sending...",
+        "error": "An error occurred while sending your message. Please try again."
+      },
+      "validation": {
+        "messageRequired": "Message is required",
+        "messageTooLong": "Message must be 1000 characters or less",
+        "contactRequired": "Email or LinkedIn is required",
+        "emailInvalid": "Please enter a valid email",
+        "linkedinInvalid": "Please enter a valid LinkedIn URL"
+      },
+      "success": {
+        "title": "Thank You!",
+        "message": "Your message has been sent. We’ll review your feedback and reply if needed.",
+        "sendAnother": "Send Another Message"
+      }
+    }
+  },
+  "es": {
+    "nav": {
+      "home": "Inicio",
+      "reports": "Reportes",
+      "submit": "Enviar",
+      "about": "Acerca de",
+      "contact": "Contacto",
+      "switchToSpanish": "Cambiar a Español",
+      "switchToEnglish": "Cambiar a Inglés"
+    },
+    "home": {
+      "title": "Scam Radar",
+      "subtitle": "Reportes de estafas impulsados por la comunidad para mantenerte seguro en línea",
+      "description": "Únete a una comunidad que protege la red reportando y compartiendo proyectos sospechosos, perfiles falsos y posibles estafas.",
+      "ctaBrowse": "Ver Reportes",
+      "ctaSubmit": "Enviar Reporte",
+      "redFlags": {
+        "title": "Señales de Alerta",
+        "subtitle": "Indicadores comunes que deberían hacerte pausar e investigar",
+        "item1": "Patrones de Código Sospechoso",
+        "item1Desc": "Repos con un solo commit, cuentas fantasma, código placeholder o pedidos de ejecutar código localmente antes de cualquier demo en vivo.",
+        "item2": "Cadenas Codificadas y Ejecución Dinámica",
+        "item2Desc": "Cadenas Base64 que decodifican a URLs externas, o ejecución dinámica como new Function() cargando código de la red.",
+        "item3": "Falta de Credibilidad",
+        "item3Desc": "Sin dominio de empresa, sin historial real en GitHub, sin demo desplegada o historias dramáticas con urgencia para apurarte."
+      },
+      "advice": {
+        "title": "Prácticas Seguras",
+        "subtitle": "Sigue estas pautas para evitar estafas",
+        "item1": "Nunca Ejecutes Código Desconocido",
+        "item1Desc": "Revisa primero en un entorno seguro (contenedor/VM) antes de ejecutar nada localmente.",
+        "item2": "Verifica las Fuentes",
+        "item2Desc": "Comprueba el dominio de la empresa, historial del repo/org, demo en vivo y perfiles de LinkedIn del equipo.",
+        "item3": "Confía en tu Instinto",
+        "item3Desc": "Si algo se siente raro, pausa y verifica. Pide pruebas como contratos en exploradores o historial real de commits."
+      },
+      "cta": {
+        "title": "Ayuda a Mantener la Comunidad Segura",
+        "subtitle": "Reporta actividades sospechosas y consulta reportes aprobados"
+      }
+    },
+    "reports": {
+      "title": "Reportes de Estafas",
+      "subtitle": "Explora reportes de actividades sospechosas enviados por la comunidad",
+      "loading": "Cargando reportes...",
+      "noResults": "No se encontraron reportes que coincidan con tus criterios.",
+      "untitled": "Sin título",
+      "platform": "Plataforma",
+      "unknown": "Desconocida",
+      "whySuspicious": "¿Por qué es sospechoso?",
+      "types": {
+        "project": "Proyecto",
+        "profile": "Perfil",
+        "company": "Empresa"
+      },
+      "statuses": {
+        "pending": "Pendiente",
+        "approved": "Aprobado",
+        "rejected": "Rechazado"
+      }
+    },
+    "filters": {
+      "filterByType": "Filtrar por Tipo",
+      "allTypes": "Todos los Tipos",
+      "projects": "Proyectos",
+      "profiles": "Perfiles",
+      "companies": "Empresas",
+      "searchReports": "Buscar Reportes",
+      "searchPlaceholder": "Buscar por título o URL..."
+    },
+    "submit": {
+      "title": "Enviar Reporte de Estafa",
+      "subtitle": "Ayuda a proteger a la comunidad reportando actividades sospechosas",
+      "form": {
+        "type": "Tipo",
+        "selectType": "Selecciona un tipo",
+        "url": "URL",
+        "urlPlaceholder": "https://ejemplo.com",
+        "title": "Título",
+        "titlePlaceholder": "Se completa automáticamente si se deja vacío",
+        "platform": "Plataforma",
+        "platformPlaceholder": "Se completa automáticamente",
+        "reason": "¿Por qué es sospechoso?",
+        "reasonPlaceholder": "Describe la actividad sospechosa, señales de alerta o preocupaciones...",
+        "contactInfo": "Tu Información de Contacto",
+        "contactInfoDesc": "Necesitamos al menos un contacto (email o LinkedIn) para verificar reportes.",
+        "email": "Email",
+        "emailPlaceholder": "tu.email@ejemplo.com",
+        "linkedin": "URL de LinkedIn",
+        "linkedinPlaceholder": "https://linkedin.com/in/tuperfil",
+        "name": "Nombre",
+        "namePlaceholder": "Tu nombre",
+        "expertise": "Experiencia/Rol",
+        "expertisePlaceholder": "ej: Frontend dev, PM, Investigador de seguridad",
+        "submit": "Enviar Reporte",
+        "submitting": "Enviando..."
+      },
+      "validation": {
+        "typeRequired": "El tipo es requerido",
+        "urlRequired": "La URL es requerida",
+        "urlInvalid": "Ingresa una URL válida",
+        "reasonRequired": "La razón es requerida",
+        "contactRequired": "Se requiere email o LinkedIn",
+        "submissionFailed": "El envío falló. Intenta de nuevo."
+      },
+      "success": {
+        "title": "¡Gracias!",
+        "message": "Revisaremos tu reporte antes de publicarlo. Serás notificado si se aprueba.",
+        "browseReports": "Ver Reportes"
+      }
+    },
+    "about": {
+      "title": "Acerca de Scam Radar",
+      "subtitle": "Nuestra misión y pautas para mantener segura a la comunidad",
+      "mission": "Nuestra Misión",
+      "missionText": "Scam Radar es una plataforma comunitaria para ayudar a desarrolladores, inversores y profesionales a identificar y evitar actividades sospechosas online. Creemos que la vigilancia colectiva es la mejor defensa contra estafas, fraude y actores maliciosos.",
+      "howItWorks": "Cómo Funciona",
+      "howItWorksText": "La comunidad envía reportes de proyectos, perfiles o empresas sospechosas. Cada envío se revisa por precisión y relevancia antes de publicarlo. Solo los reportes aprobados se hacen públicos para asegurar calidad y confiabilidad.",
+      "submissionGuidelines": "Pautas de Envío",
+      "guidelines": {
+        "specific": "Sé específico",
+        "specificDesc": "Da detalles claros sobre qué lo hace sospechoso",
+        "evidence": "Incluye evidencia",
+        "evidenceDesc": "Comparte URLs, capturas de pantalla o ejemplos concretos cuando sea posible",
+        "factual": "Sé objetivo",
+        "factualDesc": "Enfócate en señales observables en lugar de opiniones personales",
+        "contact": "Contacto requerido",
+        "contactDesc": "Requerimos un email o perfil de LinkedIn para verificar envíos"
+      },
+      "whatWeLookFor": "Qué Buscamos",
+      "lookFor": {
+        "codePatterns": "Patrones de código sospechoso o pedidos de ejecutar código no confiable",
+        "encodedStrings": "Cadenas codificadas que decodifican a URLs externas",
+        "missingInfo": "Falta de información de la empresa o credenciales falsas",
+        "dramaticStories": "Historias dramáticas con urgencia para apurar decisiones",
+        "sensitiveInfo": "Pedidos de información sensible o accesos inusuales"
+      },
+      "privacyEthics": "Privacidad y Ética",
+      "privacyEthicsText": "La privacidad es prioridad. La info del reportero se mantiene confidencial y solo se usa para verificar. No compartimos datos personales con terceros. Queremos proteger a la comunidad respetando la privacidad y la ética.",
+      "disclaimer": "Descargo de Responsabilidad",
+      "disclaimerText": "Scam Radar brinda información solo con fines educativos y de concientización. Los reportes no son asesoría legal ni prueba definitiva de fraude. Haz siempre tu propia investigación antes de decidir. No nos hacemos responsables por acciones basadas en esta información."
+    },
+    "contact": {
+      "title": "Contacto y Sugerencias",
+      "subtitle": "Queremos escuchar tus ideas y feedback",
+      "description": "Ayúdanos a mejorar Scam Radar compartiendo sugerencias, errores, nuevas funciones o falsos positivos. Tu aporte hace mejor la plataforma para todos.",
+      "form": {
+        "name": "Nombre",
+        "namePlaceholder": "Tu nombre",
+        "email": "Email",
+        "emailPlaceholder": "tu.email@ejemplo.com",
+        "linkedin": "Perfil de LinkedIn",
+        "linkedinPlaceholder": "https://linkedin.com/in/tuperfil",
+        "message": "Mensaje",
+        "messagePlaceholder": "Comparte feedback, sugerencias o reporta un problema...",
+        "submit": "Enviar Mensaje",
+        "submitting": "Enviando...",
+        "error": "Ocurrió un error al enviar el mensaje. Intenta de nuevo."
+      },
+      "validation": {
+        "messageRequired": "El mensaje es requerido",
+        "messageTooLong": "El mensaje debe tener 1000 caracteres o menos",
+        "contactRequired": "Email o LinkedIn es requerido",
+        "emailInvalid": "Ingresa un email válido",
+        "linkedinInvalid": "Ingresa una URL de LinkedIn válida"
+      },
+      "success": {
+        "title": "¡Gracias!",
+        "message": "Tu mensaje fue enviado. Revisaremos tu feedback y te responderemos si es necesario.",
+        "sendAnother": "Enviar Otro Mensaje"
+      }
+    }
+  }
+}
