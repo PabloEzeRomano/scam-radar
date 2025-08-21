@@ -1,5 +1,5 @@
 import { Report } from '@/lib/firebase/models';
-import { useT } from '@/lib/translations/TranslationsProvider';
+import { useT, useTranslations } from '@/lib/translations/TranslationsProvider';
 
 interface ReportCardProps {
   report: Report;
@@ -7,6 +7,7 @@ interface ReportCardProps {
 
 export function ReportCard({ report }: ReportCardProps) {
   const t = useT();
+  const { locale } = useTranslations();
 
   const getTypeBadgeColor = (type: string) => {
     switch (type) {
@@ -35,7 +36,7 @@ export function ReportCard({ report }: ReportCardProps) {
   };
 
   const formatDate = (date: Date) => {
-    return new Intl.DateTimeFormat('en-US', {
+    return new Intl.DateTimeFormat(locale === 'es' ? 'es-ES' : 'en-US', {
       year: 'numeric',
       month: 'short',
       day: 'numeric',

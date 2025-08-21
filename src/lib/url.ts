@@ -34,6 +34,20 @@ export function detectPlatform(url: string): string {
       return 'Bitbucket';
     } else if (hostname.includes('x.com') || hostname.includes('twitter.com')) {
       return 'X/Twitter';
+    } else if (hostname.includes('instagram.com')) {
+      return 'Instagram';
+    } else if (hostname.includes('facebook.com')) {
+      return 'Facebook';
+    } else if (hostname.includes('t.me')) {
+      return 'Telegram';
+    } else if (hostname.includes('medium.com')) {
+      return 'Medium';
+    } else if (hostname.includes('discord.com') || hostname.includes('discord.gg')) {
+      return 'Discord';
+    } else if (hostname.includes('reddit.com')) {
+      return 'Reddit';
+    } else if (hostname.includes('youtube.com') || hostname.includes('youtu.be')) {
+      return 'YouTube';
     } else {
       return 'Other';
     }

@@ -1,18 +1,8 @@
-import type { Metadata } from "next";
-import { Geist, Geist_Mono, JetBrains_Mono } from "next/font/google";
-import "./globals.css";
-import { LocaleDetector } from "@/components/LocaleDetector";
-import { Navigation } from "@/components/Navigation";
-
-const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
-});
-
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
-});
+import { LocaleDetector } from '@/components/LocaleDetector';
+import { Navigation } from '@/components/Navigation';
+import type { Metadata } from 'next';
+import { JetBrains_Mono } from 'next/font/google';
+import './globals.css';
 
 const jetBrainsMono = JetBrains_Mono({
   variable: '--font-jet-brains-mono',
@@ -21,8 +11,25 @@ const jetBrainsMono = JetBrains_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Scam Radar - Community-driven scam reports",
-  description: "Stay safe online with community-submitted reports of suspicious activity, projects, and profiles.",
+  title: 'Scam Radar - Community-driven scam reports',
+  description:
+    'Stay safe online with community-submitted reports of suspicious activity, projects, and profiles.',
+  robots: {
+    index: false,
+    follow: false,
+  },
+  openGraph: {
+    title: 'Scam Radar - Community-driven scam reports',
+    description: 'Stay safe online with community-submitted reports of suspicious activity, projects, and profiles.',
+    type: 'website',
+    locale: 'en_US',
+    siteName: 'Scam Radar',
+  },
+  twitter: {
+    card: 'summary',
+    title: 'Scam Radar - Community-driven scam reports',
+    description: 'Stay safe online with community-submitted reports of suspicious activity, projects, and profiles.',
+  },
 };
 
 export default function RootLayout({
@@ -32,9 +39,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body
-        className={`${jetBrainsMono.variable} antialiased`}
-      >
+      <body className={`${jetBrainsMono.variable} antialiased`}>
         <LocaleDetector>
           <Navigation />
           {children}
