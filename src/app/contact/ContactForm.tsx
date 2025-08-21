@@ -4,12 +4,14 @@ import { useState } from 'react';
 import { useT } from '@/lib/translations/TranslationsProvider';
 import { FormField } from '@/components/FormField';
 import { userServices, suggestionServices } from '@/lib/firebase/services';
+import { isValidEmail, isValidLinkedIn, validateRequired } from '@/lib/validation';
 
 interface FormData {
   name: string;
   email: string;
   linkedin: string;
   message: string;
+  website?: string; // Honeypot field
 }
 
 interface FormErrors {
@@ -27,6 +29,7 @@ export function ContactForm() {
     email: '',
     linkedin: '',
     message: '',
+    website: '', // Honeypot field
   });
   const [errors, setErrors] = useState<FormErrors>({});
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -35,8 +38,14 @@ export function ContactForm() {
   const validateForm = (): boolean => {
     const newErrors: FormErrors = {};
 
+    // Check honeypot field - if filled, likely a bot
+    if (formData.website) {
+      return false; // Silently reject bot submissions
+    }
+
     // Message is required
-    if (!formData.message.trim()) {
+    const messageError = validateRequired(formData.message, 'Message');
+    if (messageError) {
       newErrors.message = t('contact.validation.messageRequired');
     }
 
@@ -64,20 +73,10 @@ export function ContactForm() {
     return Object.keys(newErrors).length === 0;
   };
 
-  const isValidEmail = (email: string): boolean => {
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    return emailRegex.test(email);
-  };
-
-  const isValidLinkedIn = (linkedin: string): boolean => {
-    const linkedinRegex = /^https?:\/\/(www\.)?linkedin\.com\/in\/[a-zA-Z0-9-]+\/?$/;
-    return linkedinRegex.test(linkedin);
-  };
-
   const handleInputChange = (field: keyof FormData, value: string) => {
     setFormData(prev => ({ ...prev, [field]: value }));
     // Clear error when user starts typing
-    if (errors[field]) {
+    if (errors[field as keyof FormErrors]) {
       setErrors(prev => ({ ...prev, [field]: undefined }));
     }
     if (errors.contact) {
@@ -115,7 +114,7 @@ export function ContactForm() {
       });
 
       setSubmitStatus('success');
-      setFormData({ name: '', email: '', linkedin: '', message: '' });
+      setFormData({ name: '', email: '', linkedin: '', message: '', website: '' });
       setErrors({});
     } catch (error) {
       console.error('Error submitting suggestion:', error);
@@ -142,7 +141,7 @@ export function ContactForm() {
           </p>
           <button
             onClick={() => setSubmitStatus('idle')}
-            className="inline-flex items-center px-4 py-2 bg-gray-600 text-white rounded-md hover:bg-gray-700 transition-colors"
+            className="inline-flex items-center px-4 py-2 bg-gray-600 text-white rounded-md hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500 transition-colors"
           >
             {t('contact.success.sendAnother')}
           </button>
@@ -154,6 +153,20 @@ export function ContactForm() {
   return (
     <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-8">
       <form onSubmit={handleSubmit} className="space-y-6">
+        {/* Honeypot field - hidden from users but visible to bots */}
+        <div className="hidden">
+          <label htmlFor="website" className="sr-only">Website</label>
+          <input
+            type="text"
+            id="website"
+            name="website"
+            value={formData.website}
+            onChange={(e) => handleInputChange('website', e.target.value)}
+            tabIndex={-1}
+            autoComplete="off"
+          />
+        </div>
+
         <FormField
           label={t('contact.form.name')}
           name="name"
@@ -161,7 +174,6 @@ export function ContactForm() {
           value={formData.name}
           onChange={(value) => handleInputChange('name', value)}
           placeholder={t('contact.form.namePlaceholder')}
-          optional
         />
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -214,7 +226,7 @@ export function ContactForm() {
           <button
             type="submit"
             disabled={isSubmitting}
-            className="w-full bg-blue-600 text-white py-3 px-6 rounded-md font-medium hover:bg-blue-700 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-600 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+            className="w-full bg-blue-600 text-white py-3 px-6 rounded-md font-medium hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 disabled:opacity-60 disabled:cursor-not-allowed transition-colors"
           >
             {isSubmitting ? t('contact.form.submitting') : t('contact.form.submit')}
           </button>

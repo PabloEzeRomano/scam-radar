@@ -1,9 +1,10 @@
 'use client';
 
-import { useState, useEffect } from 'react';
 import { FormField } from '@/components/FormField';
-import { deriveTitleFromUrl, detectPlatform } from '@/lib/url';
 import { useT } from '@/lib/translations/TranslationsProvider';
+import { deriveTitleFromUrl, detectPlatform } from '@/lib/url';
+import { isValidEmail, isValidLinkedIn, validateUrl } from '@/lib/validation';
+import { useEffect, useState } from 'react';
 
 interface FormData {
   type: string;
@@ -15,6 +16,7 @@ interface FormData {
   linkedin: string;
   name: string;
   expertise: string;
+  website?: string; // Honeypot field
 }
 
 export function SubmitForm() {
@@ -29,6 +31,7 @@ export function SubmitForm() {
     linkedin: '',
     name: '',
     expertise: '',
+    website: '', // Honeypot field
   });
 
   const [errors, setErrors] = useState<Partial<FormData>>({});
@@ -63,6 +66,11 @@ export function SubmitForm() {
   const validateForm = (): boolean => {
     const newErrors: Partial<FormData> = {};
 
+    // Check honeypot field - if filled, likely a bot
+    if (formData.website) {
+      return false; // Silently reject bot submissions
+    }
+
     if (!formData.type) {
       newErrors.type = t('submit.validation.typeRequired');
     }
@@ -70,9 +78,8 @@ export function SubmitForm() {
     if (!formData.url) {
       newErrors.url = t('submit.validation.urlRequired');
     } else {
-      try {
-        new URL(formData.url);
-      } catch {
+      const urlError = validateUrl(formData.url);
+      if (urlError) {
         newErrors.url = t('submit.validation.urlInvalid');
       }
     }
@@ -85,6 +92,16 @@ export function SubmitForm() {
     if (!formData.email && !formData.linkedin) {
       newErrors.email = t('submit.validation.contactRequired');
       newErrors.linkedin = t('submit.validation.contactRequired');
+    }
+
+    // Validate email if provided
+    if (formData.email && !isValidEmail(formData.email)) {
+      newErrors.email = t('submit.validation.emailInvalid');
+    }
+
+    // Validate LinkedIn if provided
+    if (formData.linkedin && !isValidLinkedIn(formData.linkedin)) {
+      newErrors.linkedin = t('submit.validation.linkedinInvalid');
     }
 
     setErrors(newErrors);
@@ -155,6 +172,20 @@ export function SubmitForm() {
   return (
     <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-8">
       <form onSubmit={handleSubmit} className="space-y-6">
+        {/* Honeypot field - hidden from users but visible to bots */}
+        <div className="hidden">
+          <label htmlFor="website" className="sr-only">Website</label>
+          <input
+            type="text"
+            id="website"
+            name="website"
+            value={formData.website}
+            onChange={(e) => handleInputChange('website', e.target.value)}
+            tabIndex={-1}
+            autoComplete="off"
+          />
+        </div>
+
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           <FormField
             label={t('submit.form.type')}
@@ -266,7 +297,7 @@ export function SubmitForm() {
           <button
             type="submit"
             disabled={isSubmitting}
-            className="inline-flex items-center px-6 py-3 border border-transparent text-base font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 disabled:opacity-50 disabled:cursor-not-allowed"
+            className="inline-flex items-center px-6 py-3 border border-transparent text-base font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 disabled:opacity-60 disabled:cursor-not-allowed transition-colors"
           >
             {isSubmitting ? (
               <>
