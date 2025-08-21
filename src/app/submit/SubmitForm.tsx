@@ -3,6 +3,7 @@
 import { useState, useEffect } from 'react';
 import { FormField } from '@/components/FormField';
 import { deriveTitleFromUrl, detectPlatform } from '@/lib/url';
+import { useT } from '@/lib/translations/TranslationsProvider';
 
 interface FormData {
   type: string;
@@ -17,6 +18,7 @@ interface FormData {
 }
 
 export function SubmitForm() {
+  const t = useT();
   const [formData, setFormData] = useState<FormData>({
     type: '',
     url: '',
@@ -62,27 +64,27 @@ export function SubmitForm() {
     const newErrors: Partial<FormData> = {};
 
     if (!formData.type) {
-      newErrors.type = 'Type is required';
+      newErrors.type = t('submit.validation.typeRequired');
     }
 
     if (!formData.url) {
-      newErrors.url = 'URL is required';
+      newErrors.url = t('submit.validation.urlRequired');
     } else {
       try {
         new URL(formData.url);
       } catch {
-        newErrors.url = 'Please enter a valid URL';
+        newErrors.url = t('submit.validation.urlInvalid');
       }
     }
 
     if (!formData.reason) {
-      newErrors.reason = 'Reason is required';
+      newErrors.reason = t('submit.validation.reasonRequired');
     }
 
     // Require either email or LinkedIn
     if (!formData.email && !formData.linkedin) {
-      newErrors.email = 'Either email or LinkedIn URL is required';
-      newErrors.linkedin = 'Either email or LinkedIn URL is required';
+      newErrors.email = t('submit.validation.contactRequired');
+      newErrors.linkedin = t('submit.validation.contactRequired');
     }
 
     setErrors(newErrors);
@@ -106,7 +108,7 @@ export function SubmitForm() {
       setIsSubmitted(true);
     } catch (error) {
       console.error('Submission failed:', error);
-      setErrors({ reason: 'Submission failed. Please try again.' });
+      setErrors({ reason: t('submit.validation.submissionFailed') });
     } finally {
       setIsSubmitting(false);
     }
@@ -136,16 +138,15 @@ export function SubmitForm() {
             />
           </svg>
         </div>
-        <h2 className="text-2xl font-bold text-gray-900 mb-4">Thank You!</h2>
+        <h2 className="text-2xl font-bold text-gray-900 mb-4">{t('submit.success.title')}</h2>
         <p className="text-gray-600 mb-6">
-          {`We'll review your report before publishing. You'll be notified once
-          it's approved.`}
+          {t('submit.success.message')}
         </p>
         <a
           href="/reports"
           className="inline-flex items-center px-6 py-3 border border-transparent text-base font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700"
         >
-          Browse Reports
+          {t('submit.success.browseReports')}
         </a>
       </div>
     );
@@ -156,15 +157,15 @@ export function SubmitForm() {
       <form onSubmit={handleSubmit} className="space-y-6">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           <FormField
-            label="Type"
+            label={t('submit.form.type')}
             name="type"
             type="select"
             required
             options={[
-              { value: '', label: 'Select type' },
-              { value: 'project', label: 'Project' },
-              { value: 'profile', label: 'Profile' },
-              { value: 'company', label: 'Company' },
+              { value: '', label: t('submit.form.selectType') },
+              { value: 'project', label: t('reports.types.project') },
+              { value: 'profile', label: t('reports.types.profile') },
+              { value: 'company', label: t('reports.types.company') },
             ]}
             value={formData.type}
             onChange={(value) => handleInputChange('type', value)}
@@ -172,11 +173,11 @@ export function SubmitForm() {
           />
 
           <FormField
-            label="URL"
+            label={t('submit.form.url')}
             name="url"
             type="url"
             required
-            placeholder="https://example.com"
+            placeholder={t('submit.form.urlPlaceholder')}
             value={formData.url}
             onChange={(value) => handleInputChange('url', value)}
             error={errors.url}
@@ -185,28 +186,28 @@ export function SubmitForm() {
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           <FormField
-            label="Title (auto-detected from URL)"
+            label={t('submit.form.title')}
             name="title"
-            placeholder="Will be auto-detected from URL if left empty"
+            placeholder={t('submit.form.titlePlaceholder')}
             value={formData.title}
             onChange={(value) => handleInputChange('title', value)}
           />
 
           <FormField
-            label="Platform (auto-detected from URL)"
+            label={t('submit.form.platform')}
             name="platform"
-            placeholder="Will be auto-detected from URL"
+            placeholder={t('submit.form.platformPlaceholder')}
             value={formData.platform}
             onChange={(value) => handleInputChange('platform', value)}
           />
         </div>
 
         <FormField
-          label="Why is this suspicious?"
+          label={t('submit.form.reason')}
           name="reason"
           type="textarea"
           required
-          placeholder="Describe the suspicious activity, red flags, or concerns..."
+          placeholder={t('submit.form.reasonPlaceholder')}
           value={formData.reason}
           onChange={(value) => handleInputChange('reason', value)}
           error={errors.reason}
@@ -214,29 +215,28 @@ export function SubmitForm() {
 
         <div className="border-t border-gray-200 pt-6">
           <h3 className="text-lg font-medium text-gray-900 mb-4">
-            Your Contact Information
+            {t('submit.form.contactInfo')}
           </h3>
           <p className="text-sm text-gray-600 mb-4">
-            We require contact information to verify reports. At least one of
-            email or LinkedIn is required.
+            {t('submit.form.contactInfoDesc')}
           </p>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             <FormField
-              label="Email"
+              label={t('submit.form.email')}
               name="email"
               type="email"
-              placeholder="your.email@example.com"
+              placeholder={t('submit.form.emailPlaceholder')}
               value={formData.email}
               onChange={(value) => handleInputChange('email', value)}
               error={errors.email}
             />
 
             <FormField
-              label="LinkedIn URL"
+              label={t('submit.form.linkedin')}
               name="linkedin"
               type="url"
-              placeholder="https://linkedin.com/in/yourprofile"
+              placeholder={t('submit.form.linkedinPlaceholder')}
               value={formData.linkedin}
               onChange={(value) => handleInputChange('linkedin', value)}
               error={errors.linkedin}
@@ -245,17 +245,17 @@ export function SubmitForm() {
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-6">
             <FormField
-              label="Name (optional)"
+              label={t('submit.form.name')}
               name="name"
-              placeholder="Your name"
+              placeholder={t('submit.form.namePlaceholder')}
               value={formData.name}
               onChange={(value) => handleInputChange('name', value)}
             />
 
             <FormField
-              label="Expertise/Role (optional)"
+              label={t('submit.form.expertise')}
               name="expertise"
-              placeholder="e.g., Frontend dev, PM, Security researcher"
+              placeholder={t('submit.form.expertisePlaceholder')}
               value={formData.expertise}
               onChange={(value) => handleInputChange('expertise', value)}
             />
@@ -290,10 +290,10 @@ export function SubmitForm() {
                     d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
                   ></path>
                 </svg>
-                Submitting...
+                {t('submit.form.submitting')}
               </>
             ) : (
-              'Submit Report'
+              t('submit.form.submit')
             )}
           </button>
         </div>
