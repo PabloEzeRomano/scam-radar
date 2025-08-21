@@ -1,12 +1,15 @@
-'use client'
+'use client';
 
-import Link from 'next/link'
-import { usePathname } from 'next/navigation'
+import Link from 'next/link';
+import { usePathname } from 'next/navigation';
+import { useT } from '@/lib/translations/TranslationsProvider';
+import { LanguageSwitcher } from './LanguageSwitcher';
 
 export function Navigation() {
-  const pathname = usePathname()
+  const pathname = usePathname();
+  const t = useT();
 
-  const isActive = (path: string) => pathname === path
+  const isActive = (path: string) => pathname === path;
 
   return (
     <nav className="bg-white shadow-sm border-b border-gray-200">
@@ -27,7 +30,7 @@ export function Navigation() {
                   : 'text-gray-700 hover:text-blue-600 hover:bg-gray-50'
               }`}
             >
-              Home
+              {t('nav.home')}
             </Link>
             <Link
               href="/reports"
@@ -37,7 +40,7 @@ export function Navigation() {
                   : 'text-gray-700 hover:text-blue-600 hover:bg-gray-50'
               }`}
             >
-              Reports
+              {t('nav.reports')}
             </Link>
             <Link
               href="/submit"
@@ -47,7 +50,7 @@ export function Navigation() {
                   : 'text-gray-700 hover:text-blue-600 hover:bg-gray-50'
               }`}
             >
-              Submit
+              {t('nav.submit')}
             </Link>
             <Link
               href="/about"
@@ -57,11 +60,22 @@ export function Navigation() {
                   : 'text-gray-700 hover:text-blue-600 hover:bg-gray-50'
               }`}
             >
-              About
+              {t('nav.about')}
             </Link>
+            <Link
+              href="/contact"
+              className={`px-3 py-2 rounded-md text-sm font-medium transition-colors ${
+                isActive('/contact')
+                  ? 'text-blue-600 bg-blue-50'
+                  : 'text-gray-700 hover:text-blue-600 hover:bg-gray-50'
+              }`}
+            >
+              {t('nav.contact')}
+            </Link>
+            <LanguageSwitcher />
           </div>
         </div>
       </div>
     </nav>
-  )
+  );
 }

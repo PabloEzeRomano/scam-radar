@@ -4,8 +4,10 @@ import { useState, useEffect } from 'react'
 import { Report } from '@/lib/firebase/models'
 import { ReportCard } from '@/components/ReportCard'
 import { Filters } from '@/components/Filters'
+import { useT } from '@/lib/translations/TranslationsProvider'
 
 export function ReportsList() {
+  const t = useT();
   const [reports, setReports] = useState<Report[]>([])
   const [filteredReports, setFilteredReports] = useState<Report[]>([])
   const [selectedType, setSelectedType] = useState('')
@@ -68,7 +70,7 @@ export function ReportsList() {
     return (
       <div className="text-center py-12">
         <div className="inline-block animate-spin rounded-full h-8 w-8 border-b-2 border-blue-600"></div>
-        <p className="mt-2 text-gray-600">Loading reports...</p>
+        <p className="mt-2 text-gray-600">{t('reports.loading')}</p>
       </div>
     )
   }
@@ -84,7 +86,7 @@ export function ReportsList() {
 
       {filteredReports.length === 0 ? (
         <div className="text-center py-12">
-          <p className="text-gray-600">No reports found matching your criteria.</p>
+          <p className="text-gray-600">{t('reports.noResults')}</p>
         </div>
       ) : (
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">

@@ -1,10 +1,13 @@
 import { Report } from '@/lib/firebase/models';
+import { useT } from '@/lib/translations/TranslationsProvider';
 
 interface ReportCardProps {
   report: Report;
 }
 
 export function ReportCard({ report }: ReportCardProps) {
+  const t = useT();
+
   const getTypeBadgeColor = (type: string) => {
     switch (type) {
       case 'project':
@@ -48,14 +51,14 @@ export function ReportCard({ report }: ReportCardProps) {
               report.type
             )}`}
           >
-            {report.type.charAt(0).toUpperCase() + report.type.slice(1)}
+            {t(`reports.types.${report.type}`)}
           </span>
           <span
             className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium ${getStatusBadgeColor(
               report.status
             )}`}
           >
-            {report.status.charAt(0).toUpperCase() + report.status.slice(1)}
+            {t(`reports.statuses.${report.status}`)}
           </span>
         </div>
         <span className="text-sm text-gray-500">
@@ -65,11 +68,11 @@ export function ReportCard({ report }: ReportCardProps) {
 
       <div className="mb-4">
         <h3 className="text-lg font-semibold text-gray-900 mb-2">
-          {report.title || 'Untitled'}
+          {report.title || t('reports.untitled')}
         </h3>
         <p className="text-sm text-gray-600 mb-2">
-          <span className="font-medium">Platform:</span>{' '}
-          {report.platform || 'Unknown'}
+          <span className="font-medium">{t('reports.platform')}:</span>{' '}
+          {report.platform || t('reports.unknown')}
         </p>
         <a
           href={report.url}
@@ -83,7 +86,7 @@ export function ReportCard({ report }: ReportCardProps) {
 
       <div className="border-t border-gray-200 pt-4">
         <h4 className="text-sm font-medium text-gray-700 mb-2">
-          Why suspicious?
+          {t('reports.whySuspicious')}
         </h4>
         <p className="text-sm text-gray-600 leading-relaxed">{report.reason}</p>
       </div>
