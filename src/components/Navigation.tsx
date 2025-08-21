@@ -12,11 +12,11 @@ export function Navigation() {
   const isActive = (path: string) => pathname === path;
 
   return (
-    <nav className="bg-white shadow-sm border-b border-gray-200">
+    <nav className="bg-white shadow-sm border-b border-gray-200" aria-label="Main navigation">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between h-16">
           <div className="flex items-center">
-            <Link href="/" className="flex items-center">
+            <Link href="/" className="flex items-center" aria-label="Scam Radar - Home">
               <span className="text-xl font-bold text-blue-600">Scam Radar</span>
             </Link>
           </div>
@@ -29,6 +29,7 @@ export function Navigation() {
                   ? 'text-blue-600 bg-blue-50'
                   : 'text-gray-700 hover:text-blue-600 hover:bg-gray-50'
               }`}
+              aria-current={isActive('/') ? 'page' : undefined}
             >
               {t('nav.home')}
             </Link>
@@ -39,6 +40,7 @@ export function Navigation() {
                   ? 'text-blue-600 bg-blue-50'
                   : 'text-gray-700 hover:text-blue-600 hover:bg-gray-50'
               }`}
+              aria-current={isActive('/reports') ? 'page' : undefined}
             >
               {t('nav.reports')}
             </Link>
@@ -49,6 +51,7 @@ export function Navigation() {
                   ? 'text-blue-600 bg-blue-50'
                   : 'text-gray-700 hover:text-blue-600 hover:bg-gray-50'
               }`}
+              aria-current={isActive('/submit') ? 'page' : undefined}
             >
               {t('nav.submit')}
             </Link>
@@ -59,6 +62,7 @@ export function Navigation() {
                   ? 'text-blue-600 bg-blue-50'
                   : 'text-gray-700 hover:text-blue-600 hover:bg-gray-50'
               }`}
+              aria-current={isActive('/about') ? 'page' : undefined}
             >
               {t('nav.about')}
             </Link>
@@ -69,6 +73,7 @@ export function Navigation() {
                   ? 'text-blue-600 bg-blue-50'
                   : 'text-gray-700 hover:text-blue-600 hover:bg-gray-50'
               }`}
+              aria-current={isActive('/contact') ? 'page' : undefined}
             >
               {t('nav.contact')}
             </Link>
