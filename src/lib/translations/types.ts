@@ -50,6 +50,27 @@ export interface TranslationDictionary {
     title: string;
     subtitle: string;
   };
+  footer: {
+    quickLinks: string;
+    contact: string;
+    brandDescription: string;
+    location: string;
+    whatsappMessage: string;
+    emailSubject: string;
+    emailBody: string;
+    whatsappHelp: string;
+    whatsappTitle: string;
+    linkedinConnect: string;
+    linkedinTitle: string;
+    githubView: string;
+    githubTitle: string;
+    emailReport: string;
+    emailTitle: string;
+    copyright: string;
+    rights: string;
+    disclaimer: string;
+    checkPortfolio: string;
+  };
 }
 
 export interface Translations {

@@ -134,7 +134,7 @@
       },
       "success": {
         "title": "Thank You!",
-        "message": "We'll review your report before publishing. You'll be notified if it’s approved.",
+        "message": "We'll review your report before publishing. You'll be notified if it's approved.",
         "browseReports": "Browse Reports"
       }
     },
@@ -171,7 +171,7 @@
     },
     "contact": {
       "title": "Contact & Suggestions",
-      "subtitle": "We’d love your feedback and ideas",
+      "subtitle": "We'd love your feedback and ideas",
       "description": "Help us improve Scam Radar by sharing feedback, reporting bugs, suggesting features, or flagging false positives. Your input makes the platform better for everyone.",
       "form": {
         "name": "Name",
@@ -195,9 +195,30 @@
       },
       "success": {
         "title": "Thank You!",
-        "message": "Your message has been sent. We’ll review your feedback and reply if needed.",
+        "message": "Your message has been sent. We'll review your feedback and reply if needed.",
         "sendAnother": "Send Another Message"
       }
+    },
+    "footer": {
+      "quickLinks": "Quick Links",
+      "contact": "Contact",
+      "brandDescription": "Your trusted platform for reporting and detecting online scams.",
+      "location": "Buenos Aires, Argentina",
+      "whatsappMessage": "Hi! I need help with a potential scam. Can you assist me?",
+      "emailSubject": "Scam Report - Need Help",
+      "emailBody": "Hi, I'd like to report a potential scam and get assistance.",
+      "whatsappHelp": "WhatsApp - Get scam help",
+      "whatsappTitle": "Get help via WhatsApp",
+      "linkedinConnect": "LinkedIn - Connect professionally",
+      "linkedinTitle": "Connect on LinkedIn",
+      "githubView": "GitHub - View source code",
+      "githubTitle": "View on GitHub",
+      "emailReport": "Email - Report scams",
+      "emailTitle": "Report scams via email",
+      "copyright": "gemm-apps",
+      "rights": "All rights reserved.",
+      "disclaimer": "This platform is for educational and community safety purposes. Always verify information and consult official sources when in doubt.",
+      "checkPortfolio": "Check my portfolio"
     }
   },
   "es": {
@@ -399,6 +420,27 @@
         "message": "Tu mensaje fue enviado. Revisaremos tu feedback y te responderemos si es necesario.",
         "sendAnother": "Enviar Otro Mensaje"
       }
+    },
+    "footer": {
+      "quickLinks": "Enlaces Rápidos",
+      "contact": "Contacto",
+      "brandDescription": "Tu plataforma confiable para reportar y detectar estafas en línea.",
+      "location": "Buenos Aires, Argentina",
+      "whatsappMessage": "¡Hola! Necesito ayuda con una posible estafa. ¿Puedes ayudarme?",
+      "emailSubject": "Reporte de Estafa - Necesito Ayuda",
+      "emailBody": "Hola, me gustaría reportar una posible estafa y obtener asistencia.",
+      "whatsappHelp": "WhatsApp - Obtener ayuda con estafas",
+      "whatsappTitle": "Obtener ayuda vía WhatsApp",
+      "linkedinConnect": "LinkedIn - Conectar profesionalmente",
+      "linkedinTitle": "Conectar en LinkedIn",
+      "githubView": "GitHub - Ver código fuente",
+      "githubTitle": "Ver en GitHub",
+      "emailReport": "Email - Reportar estafas",
+      "emailTitle": "Reportar estafas vía email",
+      "copyright": "gemm-apps",
+      "rights": "Todos los derechos reservados.",
+      "disclaimer": "Esta plataforma es para fines educativos y de seguridad comunitaria. Siempre verifica la información y consulta fuentes oficiales cuando tengas dudas.",
+      "checkPortfolio": "Ver mi portfolio"
     }
   }
 }
