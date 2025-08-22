@@ -1,10 +1,14 @@
 'use client';
 
-import { useState } from 'react';
+import { useMemo, useState } from 'react';
 import { useT } from '@/lib/translations/TranslationsProvider';
 import { FormField } from '@/components/FormField';
 import { userServices, suggestionServices } from '@/lib/firebase/services';
-import { isValidEmail, isValidLinkedIn, validateRequired } from '@/lib/validation';
+import {
+  isValidEmail,
+  isValidLinkedIn,
+  validateRequired,
+} from '@/lib/validation';
 
 interface FormData {
   name: string;
@@ -33,7 +37,13 @@ export function ContactForm() {
   });
   const [errors, setErrors] = useState<FormErrors>({});
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const [submitStatus, setSubmitStatus] = useState<'idle' | 'success' | 'error'>('idle');
+  const [submitStatus, setSubmitStatus] = useState<
+    'idle' | 'success' | 'error'
+  >('idle');
+
+  const disableSubmit = useMemo(() => {
+    return !formData.message || (!formData.email && !formData.linkedin);
+  }, [formData]);
 
   const validateForm = (): boolean => {
     const newErrors: FormErrors = {};
@@ -74,13 +84,13 @@ export function ContactForm() {
   };
 
   const handleInputChange = (field: keyof FormData, value: string) => {
-    setFormData(prev => ({ ...prev, [field]: value }));
+    setFormData((prev) => ({ ...prev, [field]: value }));
     // Clear error when user starts typing
     if (errors[field as keyof FormErrors]) {
-      setErrors(prev => ({ ...prev, [field]: undefined }));
+      setErrors((prev) => ({ ...prev, [field]: undefined }));
     }
     if (errors.contact) {
-      setErrors(prev => ({ ...prev, contact: undefined }));
+      setErrors((prev) => ({ ...prev, contact: undefined }));
     }
   };
 
@@ -114,7 +124,13 @@ export function ContactForm() {
       });
 
       setSubmitStatus('success');
-      setFormData({ name: '', email: '', linkedin: '', message: '', website: '' });
+      setFormData({
+        name: '',
+        email: '',
+        linkedin: '',
+        message: '',
+        website: '',
+      });
       setErrors({});
     } catch (error) {
       console.error('Error submitting suggestion:', error);
@@ -129,16 +145,24 @@ export function ContactForm() {
       <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-8">
         <div className="text-center">
           <div className="mx-auto flex items-center justify-center h-12 w-12 rounded-full bg-green-100 mb-4">
-            <svg className="h-6 w-6 text-green-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+            <svg
+              className="h-6 w-6 text-green-600"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={2}
+                d="M5 13l4 4L19 7"
+              />
             </svg>
           </div>
           <h3 className="text-lg font-medium text-gray-900 mb-2">
             {t('contact.success.title')}
           </h3>
-          <p className="text-gray-600 mb-6">
-            {t('contact.success.message')}
-          </p>
+          <p className="text-gray-600 mb-6">{t('contact.success.message')}</p>
           <button
             onClick={() => setSubmitStatus('idle')}
             className="inline-flex items-center px-4 py-2 bg-gray-600 text-white rounded-md hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500 transition-colors"
@@ -155,7 +179,9 @@ export function ContactForm() {
       <form onSubmit={handleSubmit} className="space-y-6">
         {/* Honeypot field - hidden from users but visible to bots */}
         <div className="hidden">
-          <label htmlFor="website" className="sr-only">Website</label>
+          <label htmlFor="website" className="sr-only">
+            Website
+          </label>
           <input
             type="text"
             id="website"
@@ -211,24 +237,22 @@ export function ContactForm() {
         />
 
         {errors.contact && (
-          <div className="text-red-600 text-sm">
-            {errors.contact}
-          </div>
+          <div className="text-red-600 text-sm">{errors.contact}</div>
         )}
 
         {submitStatus === 'error' && (
-          <div className="text-red-600 text-sm">
-            {t('contact.form.error')}
-          </div>
+          <div className="text-red-600 text-sm">{t('contact.form.error')}</div>
         )}
 
         <div className="pt-4">
           <button
             type="submit"
-            disabled={isSubmitting}
+            disabled={isSubmitting || disableSubmit}
             className="w-full bg-blue-600 text-white py-3 px-6 rounded-md font-medium hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 disabled:opacity-60 disabled:cursor-not-allowed transition-colors"
           >
-            {isSubmitting ? t('contact.form.submitting') : t('contact.form.submit')}
+            {isSubmitting
+              ? t('contact.form.submitting')
+              : t('contact.form.submit')}
           </button>
         </div>
       </form>

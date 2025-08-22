@@ -66,7 +66,7 @@ function HomePageContent() {
             ariaLabel={t('home.redFlags.title')}
             sectionDict={dictionary?.home?.redFlags || {}}
             variant="flag"
-            intervalMs={1500}
+            intervalMs={2500}
             className="max-w-6xl mx-auto"
           />
 
@@ -123,7 +123,7 @@ function HomePageContent() {
             ariaLabel={t('home.advice.title')}
             sectionDict={dictionary?.home?.advice || {}}
             variant="practice"
-            intervalMs={1500}
+            intervalMs={2500}
             className="max-w-6xl mx-auto"
           />
 

@@ -6,13 +6,13 @@ import { useVisibleCount } from '@/hooks/useMedia';
 
 type Item = { id: string; title: string; description?: string };
 
-type Variant = 'flag' | 'practice'; // flag = red, practice = green
+type Variant = 'flag' | 'practice';
 
 interface Props {
   items: Item[];
   ariaLabel: string;
   variant: Variant;
-  autoInterval?: number; // ms, default 1500
+  autoInterval?: number;
   className?: string;
 }
 
@@ -20,12 +20,12 @@ export default function CarouselMulti({
   items,
   ariaLabel,
   variant,
-  autoInterval = 1500,
+  autoInterval,
   className,
 }: Props) {
-  const visibleCount = useVisibleCount(); // 1/2/3 responsive
-  const [index, setIndex] = useState(0); // leftmost visible item
-  const [isPaused, setIsPaused] = useState(false); // Track pause state
+  const visibleCount = useVisibleCount();
+  const [index, setIndex] = useState(0);
+  const [isPaused, setIsPaused] = useState(false);
   const viewportRef = useRef<HTMLDivElement | null>(null);
   const prefReduced = useMemo(
     () =>
@@ -45,7 +45,6 @@ export default function CarouselMulti({
   const goTo = (i: number) => {
     const next = ((i % (maxIndex + 1)) + (maxIndex + 1)) % (maxIndex + 1);
     setIndex(next);
-    // cooldown after manual interaction (8s)
     if (coolDownRef.current) window.clearTimeout(coolDownRef.current);
     coolDownRef.current = window.setTimeout(() => resetCoolDown(), 8000);
   };
@@ -90,7 +89,6 @@ export default function CarouselMulti({
   ]);
 
   // Pause on focus/hover
-
   const onKeyDown = (e: React.KeyboardEvent) => {
     if (e.key === 'ArrowRight') {
       e.preventDefault();
@@ -141,7 +139,7 @@ export default function CarouselMulti({
             key={it.id ?? i}
             className={clsx(
               'snap-start shrink-0',
-              'basis-full md:basis-1/2 lg:basis-1/3', // 1 | 2 | 3 visible
+              'basis-full md:basis-1/2 lg:basis-1/3',
               'rounded-lg border bg-white p-4 shadow-sm transition-colors',
               accent.border
             )}

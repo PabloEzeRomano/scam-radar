@@ -1,11 +1,12 @@
 'use client'
 
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useMemo } from 'react'
 import { Report } from '@/lib/firebase/models'
 import { ReportCard } from '@/components/ReportCard'
 import { Filters } from '@/components/Filters'
 import { useT } from '@/lib/translations/TranslationsProvider'
 import Link from 'next/link'
+import { reportServices } from '@/lib/firebase/services'
 
 // Skeleton loader component
 function ReportSkeleton() {
@@ -36,47 +37,22 @@ function ReportSkeleton() {
 export function ReportsList() {
   const t = useT();
   const [reports, setReports] = useState<Report[]>([])
-  const [filteredReports, setFilteredReports] = useState<Report[]>([])
   const [selectedType, setSelectedType] = useState('')
   const [searchQuery, setSearchQuery] = useState('')
   const [loading, setLoading] = useState(true)
 
   useEffect(() => {
-    // For MVP, we'll use mock data since we don't have the database set up yet
-    const mockReports: Report[] = [
-      {
-        id: '1',
-        type: 'profile',
-        url: 'https://www.linkedin.com/in/kannan-kanagiah-03b866a5/',
-        title: 'kannan-kanagiah-03b866a5',
-        platform: 'LinkedIn',
-        reason: 'Suspicious behaviour, fast process, too good to be true',
-        reporterId: 'user1',
-        status: 'approved',
-        createdAt: new Date('2024-01-15')
-      },
-      {
-        id: '2',
-        type: 'company',
-        url: 'https://www.linkedin.com/company/ohm-developments/',
-        title: 'ohm-developments',
-        platform: 'LinkedIn',
-        reason: 'No posts, suspicious activity',
-        reporterId: 'user1',
-        status: 'approved',
-        createdAt: new Date('2024-01-10')
-      }
-    ]
+    const getReports = async () => {
+      const reports = await reportServices.getReports()
+      setReports(reports)
+    }
 
-    setReports(mockReports)
-    setFilteredReports(mockReports)
+    getReports()
     setLoading(false)
   }, [])
 
-  useEffect(() => {
+  const filteredReports = useMemo(() => {
     let filtered = reports
-
-    // Filter by type
     if (selectedType) {
       filtered = filtered.filter(report => report.type === selectedType)
     }
@@ -90,7 +66,7 @@ export function ReportsList() {
       )
     }
 
-    setFilteredReports(filtered)
+    return filtered
   }, [reports, selectedType, searchQuery])
 
   if (loading) {

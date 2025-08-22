@@ -1,13 +1,15 @@
 'use client';
 
 import { FormField } from '@/components/FormField';
+import { reportServices, userServices } from '@/lib/firebase/services';
 import { useT } from '@/lib/translations/TranslationsProvider';
 import { deriveTitleFromUrl, detectPlatform } from '@/lib/url';
 import { isValidEmail, isValidLinkedIn, validateUrl } from '@/lib/validation';
-import { useEffect, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
+import { ReportType } from '@/lib/firebase/models';
 
 interface FormData {
-  type: string;
+  type: ReportType;
   url: string;
   title: string;
   platform: string;
@@ -22,7 +24,7 @@ interface FormData {
 export function SubmitForm() {
   const t = useT();
   const [formData, setFormData] = useState<FormData>({
-    type: '',
+    type: '' as ReportType,
     url: '',
     title: '',
     platform: '',
@@ -38,7 +40,6 @@ export function SubmitForm() {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
 
-  // Auto-detect title and platform when URL changes
   useEffect(() => {
     if (formData.url) {
       try {
@@ -72,7 +73,7 @@ export function SubmitForm() {
     }
 
     if (!formData.type) {
-      newErrors.type = t('submit.validation.typeRequired');
+      newErrors.type = t('submit.validation.typeRequired') as ReportType;
     }
 
     if (!formData.url) {
@@ -108,6 +109,14 @@ export function SubmitForm() {
     return Object.keys(newErrors).length === 0;
   };
 
+  const disableSubmit = useMemo(() => {
+    return (
+      !formData.url ||
+      !formData.reason ||
+      (!formData.email && !formData.linkedin)
+    );
+  }, [formData]);
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
@@ -118,9 +127,21 @@ export function SubmitForm() {
     setIsSubmitting(true);
 
     try {
-      // For MVP, we'll just simulate the submission
-      // In production, this would call your API to create the user and report
-      await new Promise((resolve) => setTimeout(resolve, 1000));
+      const user = await userServices.upsertUser({
+        email: formData.email,
+        name: formData.name,
+        expertise: formData.expertise,
+        linkedin: formData.linkedin,
+      });
+
+      await reportServices.createReport({
+        url: formData.url,
+        title: formData.title,
+        type: formData.type,
+        reason: formData.reason,
+        reporterId: user.id,
+        status: 'pending',
+      });
 
       setIsSubmitted(true);
     } catch (error) {
@@ -155,10 +176,10 @@ export function SubmitForm() {
             />
           </svg>
         </div>
-        <h2 className="text-2xl font-bold text-gray-900 mb-4">{t('submit.success.title')}</h2>
-        <p className="text-gray-600 mb-6">
-          {t('submit.success.message')}
-        </p>
+        <h2 className="text-2xl font-bold text-gray-900 mb-4">
+          {t('submit.success.title')}
+        </h2>
+        <p className="text-gray-600 mb-6">{t('submit.success.message')}</p>
         <a
           href="/reports"
           className="inline-flex items-center px-6 py-3 border border-transparent text-base font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700"
@@ -174,7 +195,9 @@ export function SubmitForm() {
       <form onSubmit={handleSubmit} className="space-y-6">
         {/* Honeypot field - hidden from users but visible to bots */}
         <div className="hidden">
-          <label htmlFor="website" className="sr-only">Website</label>
+          <label htmlFor="website" className="sr-only">
+            Website
+          </label>
           <input
             type="text"
             id="website"
@@ -296,7 +319,7 @@ export function SubmitForm() {
         <div className="flex items-center justify-end pt-6">
           <button
             type="submit"
-            disabled={isSubmitting}
+            disabled={isSubmitting || disableSubmit}
             className="inline-flex items-center px-6 py-3 border border-transparent text-base font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 disabled:opacity-60 disabled:cursor-not-allowed transition-colors"
           >
             {isSubmitting ? (
@@ -314,12 +337,12 @@ export function SubmitForm() {
                     r="10"
                     stroke="currentColor"
                     strokeWidth="4"
-                  ></circle>
+                  />
                   <path
                     className="opacity-75"
                     fill="currentColor"
                     d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
-                  ></path>
+                  />
                 </svg>
                 {t('submit.form.submitting')}
               </>
