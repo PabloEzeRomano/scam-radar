@@ -1,5 +1,6 @@
 import { LocaleDetector } from '@/components/LocaleDetector';
 import { Navigation } from '@/components/Navigation';
+import { Footer } from '@/components/Footer';
 import type { Metadata } from 'next';
 import { JetBrains_Mono } from 'next/font/google';
 import './globals.css';
@@ -43,6 +44,7 @@ export default function RootLayout({
         <LocaleDetector>
           <Navigation />
           {children}
+          <Footer />
         </LocaleDetector>
       </body>
     </html>

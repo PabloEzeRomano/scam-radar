@@ -1,19 +1,10 @@
 'use client';
 
-import { LocaleDetector } from '@/components/LocaleDetector';
 import SectionCarousel from '@/components/SectionCarousel';
 import { useT, useTranslations } from '@/lib/translations/TranslationsProvider';
 import Link from 'next/link';
 
 export default function HomePage() {
-  return (
-    <LocaleDetector>
-      <HomePageContent />
-    </LocaleDetector>
-  );
-}
-
-function HomePageContent() {
   const t = useT();
   const { dictionary } = useTranslations();
 
