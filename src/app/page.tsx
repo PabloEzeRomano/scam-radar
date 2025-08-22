@@ -33,18 +33,18 @@ function HomePageContent() {
               {t('home.description')}
             </p>
             <div className="mt-10 flex items-center justify-center gap-x-6">
-              <a
+              <Link
                 href="/reports"
                 className="rounded-md bg-blue-600 px-6 py-3 text-lg font-semibold text-white shadow-sm hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition-colors"
               >
                 {t('home.ctaBrowse')}
-              </a>
-              <a
+              </Link>
+              <Link
                 href="/submit"
                 className="rounded-md bg-white px-6 py-3 text-lg font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition-colors"
               >
                 {t('home.ctaSubmit')}
-              </a>
+              </Link>
             </div>
           </div>
         </div>
