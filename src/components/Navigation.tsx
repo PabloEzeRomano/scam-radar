@@ -11,7 +11,7 @@ export function Navigation() {
 
   const isActive = (path: string) => pathname === path;
 
-  const links = ['', 'reports', 'submit', 'about', 'contact'];
+  const links = ['', 'reports', 'submit', 'about', 'contact', 'analyser'];
 
   return (
     <nav
