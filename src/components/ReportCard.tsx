@@ -1,69 +1,28 @@
-import { Report } from '@/lib/firebase/models';
 import { useT, useTranslations } from '@/lib/translations/TranslationsProvider';
-
-interface ReportCardProps {
-  report: Report;
-}
+import { ReportCardProps } from '@/types';
+import { StatusBadge, TypeBadge } from './Badge';
 
 export function ReportCard({ report }: ReportCardProps) {
   const t = useT();
   const { locale } = useTranslations();
-
-  const getTypeBadgeColor = (type: string) => {
-    switch (type) {
-      case 'project':
-        return 'bg-blue-100 text-blue-800';
-      case 'profile':
-        return 'bg-green-100 text-green-800';
-      case 'company':
-        return 'bg-purple-100 text-purple-800';
-      default:
-        return 'bg-gray-100 text-gray-800';
-    }
-  };
-
-  const getStatusBadgeColor = (status: string) => {
-    switch (status) {
-      case 'approved':
-        return 'bg-green-100 text-green-800';
-      case 'pending':
-        return 'bg-yellow-100 text-yellow-800';
-      case 'rejected':
-        return 'bg-red-100 text-red-800';
-      default:
-        return 'bg-gray-100 text-gray-800';
-    }
-  };
 
   const formatDate = (date: Date) => {
     return new Intl.DateTimeFormat(locale === 'es' ? 'es-ES' : 'en-US', {
       year: 'numeric',
       month: 'short',
       day: 'numeric',
-    }).format(new Date(date));
+    }).format(date);
   };
 
   return (
     <div className="bg-white rounded-lg shadow-md border border-gray-200 p-6 hover:shadow-lg transition-shadow">
       <div className="flex items-start justify-between mb-4">
         <div className="flex items-center space-x-3">
-          <span
-            className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium ${getTypeBadgeColor(
-              report.type
-            )}`}
-          >
-            {t(`reports.types.${report.type}`)}
-          </span>
-          <span
-            className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium ${getStatusBadgeColor(
-              report.status
-            )}`}
-          >
-            {t(`reports.statuses.${report.status}`)}
-          </span>
+          <TypeBadge type={report.type} />
+          <StatusBadge status={report.status} />
         </div>
         <span className="text-sm text-gray-500">
-          {formatDate(report.createdAt)}
+          {formatDate(report.createdAt.toDate())}
         </span>
       </div>
 

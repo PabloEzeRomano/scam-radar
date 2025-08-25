@@ -1,33 +1,20 @@
-import { forwardRef } from 'react'
-
-interface FormFieldProps {
-  label: string
-  name?: string
-  type?: 'text' | 'email' | 'url' | 'textarea' | 'select'
-  required?: boolean
-  optional?: boolean
-  placeholder?: string
-  options?: { value: string; label: string }[]
-  error?: string
-  value?: string
-  onChange?: (value: string) => void
-  rows?: number
-}
+import { FormFieldProps } from '@/types';
+import { forwardRef } from 'react';
 
 export const FormField = forwardRef<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement, FormFieldProps>(
   ({ label, name, type = 'text', required = false, optional = false, placeholder, options, error, value, onChange, rows }, ref) => {
-    const id = `field-${name || 'field'}`
-    const errorId = `${id}-error`
+    const id = `field-${name || 'field'}`;
+    const errorId = `${id}-error`;
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
-      onChange?.(e.target.value)
-    }
+      onChange?.(e.target.value);
+    };
 
     const baseInputClasses = `p-3 block w-full rounded-md border shadow-sm text-gray-900 placeholder-gray-500 bg-white sm:text-sm transition-colors duration-200 ${
       error
         ? 'border-red-500 focus:ring-red-500 focus:border-red-500'
         : 'border-gray-300 focus:ring-blue-500 focus:border-blue-500'
-    } focus:outline-none focus:ring-2`
+    } focus:outline-none focus:ring-2`;
 
     return (
       <div className="space-y-2">
@@ -91,8 +78,8 @@ export const FormField = forwardRef<HTMLInputElement | HTMLTextAreaElement | HTM
           </p>
         )}
       </div>
-    )
+    );
   }
-)
+);
 
-FormField.displayName = 'FormField'
+FormField.displayName = 'FormField';
