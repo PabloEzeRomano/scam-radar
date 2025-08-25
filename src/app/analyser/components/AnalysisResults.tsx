@@ -1,7 +1,7 @@
 import { RiskBadge } from '../../../components/Badge';
 import { Pill } from '../../../components/Pill';
 import { useT } from '../../../lib/translations/TranslationsProvider';
-import { AnalysisResultsProps } from '@/lib/types/analyser';
+import { AnalysisResultsProps } from '@/types';
 
 export function AnalysisResults({
   analysis,
@@ -157,13 +157,13 @@ export function AnalysisResults({
             )}
 
           {/* Files */}
-          {analysis.signals.files && analysis.signals.files.length > 0 && (
+          {analysis.signals.filesWithHits && analysis.signals.filesWithHits.length > 0 && (
             <div className="mb-4">
               <h4 className="text-sm font-medium text-gray-700 mb-2">
                 {t('analyser.results.suspiciousFiles')}:
               </h4>
               <div className="flex flex-wrap gap-1">
-                {analysis.signals.files.map((file, i) => (
+                {analysis.signals.filesWithHits.map((file, i) => (
                   <Pill key={i} variant="warning">
                     {file}
                   </Pill>
