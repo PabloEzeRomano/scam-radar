@@ -6,6 +6,7 @@
       "submit": "Submit",
       "about": "About",
       "contact": "Contact",
+      "analyser": "Analyser",
       "switchToSpanish": "Switch to Spanish",
       "switchToEnglish": "Switch to English"
     },
@@ -138,6 +139,103 @@
         "browseReports": "Browse Reports"
       }
     },
+    "analyser": {
+      "title": "AI Analyser",
+      "subtitle": "Use AI to analyse suspicious content and detect potential scams",
+      "tabs": {
+        "chat": "Chat Analysis",
+        "repo": "Repository Analysis"
+      },
+      "chat": {
+        "title": "Chat Analysis",
+        "subtitle": "Analyse chat conversations, messages, or text content for suspicious patterns",
+        "input": "Input",
+        "screenshots": "Screenshots (optional)",
+        "chatText": "Chat text",
+        "chatTextPlaceholder": "Paste here the chat text or conversation you want to analyse...",
+        "analyseButton": "Analyse Chat",
+        "processingImages": "Processing images...",
+        "analysing": "Analysing...",
+        "errorNoText": "Paste the chat text or upload screenshots to analyse.",
+        "ocrError": "OCR error"
+      },
+      "repo": {
+        "title": "Repository Analysis",
+        "subtitle": "Analyse GitHub repositories and code for suspicious patterns and potential threats",
+        "input": "Input",
+        "repoUrl": "Repository URL (optional)",
+        "repoUrlPlaceholder": "https://github.com/user/repo",
+        "zipFile": "Repository ZIP file",
+        "analyseButton": "Analyse Repository",
+        "analysing": "Analysing...",
+        "errorNoZip": "Upload a .zip of the repo to analyse."
+      },
+      "results": {
+        "title": "Analysis Results",
+        "riskScore": "Risk Score",
+        "summary": "Summary",
+        "flags": "Red Flags",
+        "guidance": "Recommendations",
+        "entities": "Detected Entities",
+        "emails": "Emails:",
+        "urls": "URLs:",
+        "wallets": "Wallets:",
+        "signals": "Detected Signals",
+        "suspiciousScripts": "Suspicious Scripts:",
+        "suspiciousFiles": "Suspicious Files:",
+        "findings": "Findings:",
+        "evidence": "Evidence",
+        "convertToReport": "Convert to Report"
+      },
+      "reportForm": {
+        "title": "Create Report",
+        "submitButton": "Send Report"
+      },
+      "common": {
+        "errorAnalysing": "Error analysing",
+        "errorAnalysingRepo": "Error analysing repository",
+        "reportSubmitted": "Report submitted successfully!",
+        "errorSubmitting": "Error submitting report"
+      },
+      "providerSelector": {
+        "title": "AI Provider",
+        "heuristic": "Heuristic",
+        "openrouter": "OpenRouter",
+        "cloudflare": "Cloudflare",
+        "deepseek": "DeepSeek",
+        "openai": "OpenAI",
+        "tooltips": {
+          "heuristic": "Free (no AI, rules only)",
+          "openrouter": "Free with :free models (requires server key)",
+          "cloudflare": "Free daily (requires server token or BYO)",
+          "deepseek": "Cheap (BYO key)",
+          "openai": "Paid (BYO key)"
+        },
+        "openRouterKey": "OpenRouter API Key (optional, if not using server key)",
+        "openRouterKeyPlaceholder": "sk-or-...",
+        "cloudflareToken": "CF API Token",
+        "cloudflareAccountId": "CF Account ID",
+        "cloudflareModel": "Model",
+        "deepseekKey": "DeepSeek API Key",
+        "deepseekKeyPlaceholder": "sk-...",
+        "openaiKey": "OpenAI API Key",
+        "openaiKeyPlaceholder": "sk-...",
+        "info": {
+          "heuristic": "Free mode: heuristics only (no AI).",
+          "serverKey": "Uses server key (free with limits). We don't save user keys.",
+          "byoKey": "We'll use your key only for this request (not persisted)."
+        }
+      }
+    },
+    "fileDropzone": {
+      "clickToUpload": "Click to upload",
+      "dragAndDrop": "or drag and drop",
+      "anyFileType": "Any file type",
+      "upTo": "up to",
+      "filesSelected": "Files selected",
+      "fileSelected": "File selected",
+      "removeFile": "Remove file"
+    },
     "about": {
       "title": "About Scam Radar",
       "subtitle": "Our mission and guidelines to keep the community safe",
@@ -228,6 +326,7 @@
       "submit": "Enviar",
       "about": "Acerca de",
       "contact": "Contacto",
+      "analyser": "Analizador",
       "switchToSpanish": "Cambiar a Español",
       "switchToEnglish": "Cambiar a Inglés"
     },
@@ -359,6 +458,102 @@
         "message": "Revisaremos tu reporte antes de publicarlo. Serás notificado si se aprueba.",
         "browseReports": "Ver Reportes"
       }
+    },
+    "analyser": {
+      "title": "Analizador IA",
+      "subtitle": "Usa IA para analizar contenido sospechoso y detectar posibles estafas",
+      "tabs": {
+        "chat": "Análisis de Chat",
+        "repo": "Análisis de Repositorio"
+      },
+      "chat": {
+        "title": "Análisis de Chat",
+        "subtitle": "Analiza conversaciones de chat, mensajes o contenido de texto en busca de patrones sospechosos",
+        "input": "Entrada",
+        "screenshots": "Capturas de pantalla (opcional)",
+        "chatText": "Texto del chat",
+        "chatTextPlaceholder": "Pegá aquí el texto del chat o conversación que querés analizar...",
+        "analyseButton": "Analizar Chat",
+        "processingImages": "Procesando imágenes...",
+        "analysing": "Analizando...",
+        "errorNoText": "Pegá el texto del chat o subí screenshots para analizar.",
+        "ocrError": "Error de OCR"
+      },
+      "repo": {
+        "title": "Análisis de Repositorio",
+        "subtitle": "Analiza repositorios de GitHub y código en busca de patrones sospechosos y amenazas potenciales",
+        "input": "Entrada",
+        "repoUrl": "URL del Repositorio (opcional)",
+        "repoUrlPlaceholder": "https://github.com/user/repo",
+        "zipFile": "Archivo ZIP del Repositorio",
+        "analyseButton": "Analizar Repositorio",
+        "analysing": "Analizando...",
+        "errorNoZip": "Subí un .zip del repo para analizar."
+      },
+      "results": {
+        "title": "Resultados del Análisis",
+        "riskScore": "Puntuación de Riesgo",
+        "summary": "Resumen",
+        "flags": "Señales de Alerta",
+        "guidance": "Recomendaciones",
+        "entities": "Entidades Detectadas",
+        "emails": "Emails:",
+        "urls": "URLs:",
+        "wallets": "Wallets:",
+        "signals": "Señales Detectadas",
+        "suspiciousScripts": "Scripts Sospechosos:",
+        "suspiciousFiles": "Archivos Sospechosos:",
+        "findings": "Hallazgos:",
+        "evidence": "Evidencia",
+        "convertToReport": "Convertir en Reporte"
+      },
+      "reportForm": {
+        "title": "Crear Reporte",
+        "submitButton": "Enviar Reporte"
+      },
+      "common": {
+        "errorAnalysing": "Error al analizar",
+        "reportSubmitted": "Reporte enviado exitosamente!",
+        "errorSubmitting": "Error al enviar reporte"
+      },
+      "providerSelector": {
+        "title": "Proveedor de IA",
+        "heuristic": "Heurístico",
+        "openrouter": "OpenRouter",
+        "cloudflare": "Cloudflare",
+        "deepseek": "DeepSeek",
+        "openai": "OpenAI",
+        "tooltips": {
+          "heuristic": "Gratuito (solo reglas)",
+          "openrouter": "Gratuito con :free models (requiere clave de servidor)",
+          "cloudflare": "Gratuito diario (requiere token de servidor o BYO)",
+          "deepseek": "Barato (BYO key)",
+          "openai": "Pago (BYO key)"
+        },
+        "openRouterKey": "Clave de API de OpenRouter (opcional, si no se usa clave de servidor)",
+        "openRouterKeyPlaceholder": "sk-or-...",
+        "cloudflareToken": "Token de API de CF",
+        "cloudflareAccountId": "ID de Cuenta de CF",
+        "cloudflareModel": "Modelo",
+        "deepseekKey": "Clave de API de DeepSeek",
+        "deepseekKeyPlaceholder": "sk-...",
+        "openaiKey": "Clave de API de OpenAI",
+        "openaiKeyPlaceholder": "sk-...",
+        "info": {
+          "heuristic": "Modo gratuito: solo heurísticas.",
+          "serverKey": "Usa clave de servidor (gratuito con límites). No guardamos las claves de los usuarios.",
+          "byoKey": "Usaremos tu clave solo para esta solicitud (no persistida)."
+        }
+      }
+    },
+    "fileDropzone": {
+      "clickToUpload": "Click para subir",
+      "dragAndDrop": "o arrastra y suelta",
+      "anyFileType": "Cualquier tipo de archivo",
+      "upTo": "hasta",
+      "filesSelected": "Archivos seleccionados",
+      "fileSelected": "Archivo seleccionado",
+      "removeFile": "Eliminar archivo"
     },
     "about": {
       "title": "Acerca de Scam Radar",
