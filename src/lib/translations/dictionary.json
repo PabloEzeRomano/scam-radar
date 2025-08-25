@@ -513,6 +513,7 @@
       },
       "common": {
         "errorAnalysing": "Error al analizar",
+        "errorAnalysingDesc": "Ocurrió un error al analizar el contenido. Por favor, intenta nuevamente.",
         "reportSubmitted": "Reporte enviado exitosamente!",
         "errorSubmitting": "Error al enviar reporte"
       },

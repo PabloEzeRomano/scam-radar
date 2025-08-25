@@ -1,6 +1,12 @@
 'use client';
 
-import React, { createContext, useContext, useState, useEffect, ReactNode } from 'react';
+import React, {
+  createContext,
+  useContext,
+  useState,
+  useEffect,
+  ReactNode,
+} from 'react';
 import { Locale, TranslationDictionary, Translations } from './types';
 import dictionaryData from './dictionary.json';
 
@@ -12,16 +18,23 @@ interface TranslationsContextType {
   loading: boolean;
 }
 
-const TranslationsContext = createContext<TranslationsContextType | undefined>(undefined);
+const TranslationsContext = createContext<TranslationsContextType | undefined>(
+  undefined
+);
 
 interface TranslationsProviderProps {
   children: ReactNode;
   initialLocale?: Locale;
 }
 
-export function TranslationsProvider({ children, initialLocale = 'en' }: TranslationsProviderProps) {
+export function TranslationsProvider({
+  children,
+  initialLocale = 'en',
+}: TranslationsProviderProps) {
   const [locale, setLocale] = useState<Locale>(initialLocale);
-  const [dictionary, setDictionary] = useState<TranslationDictionary | null>(null);
+  const [dictionary, setDictionary] = useState<TranslationDictionary | null>(
+    null
+  );
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -29,12 +42,12 @@ export function TranslationsProvider({ children, initialLocale = 'en' }: Transla
       setLoading(true);
       try {
         // In a real app, you might fetch this from an API
-        const translations = dictionaryData as Translations;
-        setDictionary(translations[locale]);
+        const translations = dictionaryData;
+        setDictionary(translations[locale] as TranslationDictionary);
       } catch (error) {
         console.error('Failed to load dictionary:', error);
         // Fallback to English if loading fails
-        const fallbackDict = (dictionaryData as Translations).en;
+        const fallbackDict = dictionaryData.en as TranslationDictionary;
         setDictionary(fallbackDict);
         setLocale('en');
       } finally {
@@ -90,7 +103,9 @@ export function TranslationsProvider({ children, initialLocale = 'en' }: Transla
 export function useTranslations() {
   const context = useContext(TranslationsContext);
   if (context === undefined) {
-    throw new Error('useTranslations must be used within a TranslationsProvider');
+    throw new Error(
+      'useTranslations must be used within a TranslationsProvider'
+    );
   }
   return context;
 }

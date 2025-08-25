@@ -228,7 +228,6 @@ export const reportServices = {
       if (!isFirebaseReady()) throw new Error('Firebase not initialized');
 
       const statusValue = newReportData.status || 'pending';
-      const localCreatedAt = new Date();
 
       const createdRef = await addDoc(collection(db!, COLLECTIONS.REPORTS), {
         ...newReportData,
@@ -240,7 +239,7 @@ export const reportServices = {
         id: createdRef.id,
         ...(newReportData as Report),
         status: statusValue,
-        createdAt: localCreatedAt,
+        createdAt: serverTimestamp(),
       } as Report;
     } catch (err) {
       throw toAppError('Failed to create report', err);
@@ -363,10 +362,9 @@ export const suggestionServices = {
     try {
       if (!isFirebaseReady()) throw new Error('Firebase not initialized');
 
-      const localCreatedAt = new Date();
       const localReturnPayload = {
         ...newSuggestionData,
-        createdAt: localCreatedAt,
+        createdAt: serverTimestamp(),
       };
 
       const createdRef = await addDoc(
