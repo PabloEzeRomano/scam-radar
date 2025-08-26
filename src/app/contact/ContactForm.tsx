@@ -8,7 +8,7 @@ import {
   isValidEmail,
   isValidLinkedIn,
   validateRequired,
-} from '@/lib/validation';
+} from '@/lib/validation/validation';
 
 interface FormData {
   name: string;

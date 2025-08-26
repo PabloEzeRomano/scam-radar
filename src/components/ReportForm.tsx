@@ -5,8 +5,12 @@ import { reportServices, userServices } from '@/lib/firebase/services';
 import { useT } from '@/lib/translations/TranslationsProvider';
 import { ReportFormData, ReportFormProps, ReportType } from '@/types';
 import { deriveTitleFromUrl, detectPlatform } from '@/lib/url';
-import { isValidEmail, isValidLinkedIn, validateUrl } from '@/lib/validation';
-import { useEffect, useMemo, useState } from 'react';
+import {
+  isValidEmail,
+  isValidLinkedIn,
+  validateUrl,
+} from '@/lib/validation/validation';
+import { useMemo, useState } from 'react';
 
 export function ReportForm({
   initialData = {},
@@ -35,29 +39,34 @@ export function ReportForm({
   const [errors, setErrors] = useState<Partial<ReportFormData>>({});
   const [isSubmitting, setIsSubmitting] = useState(false);
 
-  useEffect(() => {
+  const handleUrlBlur = () => {
     if (formData.url) {
       try {
-        new URL(formData.url); // Validate URL format
+        const concatenatedUrl = formData.url.startsWith('http')
+          ? formData.url
+          : `https://${formData.url}`;
+        new URL(concatenatedUrl); // Validate URL format
 
         if (!formData.title) {
           setFormData((prev) => ({
             ...prev,
-            title: deriveTitleFromUrl(formData.url!),
+            title: deriveTitleFromUrl(concatenatedUrl),
           }));
         }
 
         if (!formData.platform) {
           setFormData((prev) => ({
             ...prev,
-            platform: detectPlatform(formData.url!),
+            platform: detectPlatform(concatenatedUrl),
           }));
         }
       } catch {
+        console.log('invalid url');
+        console.log(new URL(formData.url));
         // Invalid URL, don't auto-fill
       }
     }
-  }, [formData.url, formData.platform, formData.title]);
+  };
 
   const validateForm = (): boolean => {
     const newErrors: Partial<ReportFormData> = {};
@@ -225,6 +234,7 @@ export function ReportForm({
             placeholder={t('submit.form.urlPlaceholder')}
             value={formData.url}
             onChange={(value) => handleInputChange('url', value)}
+            onBlur={handleUrlBlur}
             error={errors.url}
             required={analysisType === 'chat'}
             optional={analysisType !== 'chat'}

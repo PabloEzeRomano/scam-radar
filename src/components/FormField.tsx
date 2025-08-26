@@ -1,12 +1,35 @@
 import { FormFieldProps } from '@/types';
 import { forwardRef } from 'react';
 
-export const FormField = forwardRef<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement, FormFieldProps>(
-  ({ label, name, type = 'text', required = false, optional = false, placeholder, options, error, value, onChange, rows }, ref) => {
+export const FormField = forwardRef<
+  HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement,
+  FormFieldProps
+>(
+  (
+    {
+      label,
+      name,
+      type = 'text',
+      required = false,
+      optional = false,
+      placeholder,
+      options,
+      error,
+      value,
+      onChange,
+      onBlur,
+      rows,
+    },
+    ref
+  ) => {
     const id = `field-${name || 'field'}`;
     const errorId = `${id}-error`;
 
-    const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
+    const handleChange = (
+      e: React.ChangeEvent<
+        HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement
+      >
+    ) => {
       onChange?.(e.target.value);
     };
 
@@ -21,7 +44,7 @@ export const FormField = forwardRef<HTMLInputElement | HTMLTextAreaElement | HTM
         <label htmlFor={id} className="block text-sm font-medium text-gray-800">
           {label}
           {required && <span className="text-red-500 ml-1">*</span>}
-          {optional && <span className="text-gray-500 ml-1">(Optional)</span>}
+          {/* {optional && <span className="text-gray-500 ml-1">(Optional)</span>} */}
         </label>
 
         {type === 'textarea' ? (
@@ -33,6 +56,7 @@ export const FormField = forwardRef<HTMLInputElement | HTMLTextAreaElement | HTM
             placeholder={placeholder}
             value={value}
             onChange={handleChange}
+            onBlur={onBlur}
             rows={rows || 4}
             className={baseInputClasses}
             aria-invalid={!!error}
@@ -51,7 +75,11 @@ export const FormField = forwardRef<HTMLInputElement | HTMLTextAreaElement | HTM
             aria-describedby={error ? errorId : undefined}
           >
             {options?.map((option) => (
-              <option className="p-2 bg-white text-gray-900 text-sm" key={option.value} value={option.value}>
+              <option
+                className="p-2 bg-white text-gray-900 text-sm"
+                key={option.value}
+                value={option.value}
+              >
                 {option.label}
               </option>
             ))}
@@ -66,6 +94,7 @@ export const FormField = forwardRef<HTMLInputElement | HTMLTextAreaElement | HTM
             placeholder={placeholder}
             value={value}
             onChange={handleChange}
+            onBlur={onBlur}
             className={baseInputClasses}
             aria-invalid={!!error}
             aria-describedby={error ? errorId : undefined}

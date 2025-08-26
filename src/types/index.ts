@@ -281,6 +281,7 @@ export interface FormFieldProps {
   error?: string;
   value?: string;
   onChange?: (value: string) => void;
+  onBlur?: () => void;
   rows?: number;
 }
 

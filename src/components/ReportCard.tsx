@@ -22,7 +22,11 @@ export function ReportCard({ report }: ReportCardProps) {
           <StatusBadge status={report.status} />
         </div>
         <span className="text-sm text-gray-500">
-          {formatDate(report.createdAt.toDate())}
+          {formatDate(
+            report.createdAt instanceof Date
+              ? report.createdAt
+              : report.createdAt.toDate()
+          )}
         </span>
       </div>
 
