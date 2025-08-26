@@ -62,11 +62,10 @@ export interface AnalysisResultsProps {
 }
 
 /* ------------------------- Report Form Types ------------------------- */
-
 export interface ReportFormData {
   type: ReportType;
-  url: string;
-  title: string;
+  url?: string; // Required for chat, optional for repo
+  title: string; // Always required, auto-filled based on analysis type
   platform: string;
   reason: string;
   email: string;
@@ -83,6 +82,18 @@ export interface ReportFormProps {
   submitButtonText?: string;
   showHoneypot?: boolean;
   className?: string;
+  analysisType?: 'chat' | 'repo'; // To determine title requirements
+}
+
+/* ------------------------- Form Validation Types ------------------------- */
+
+export interface ReportFormValidation {
+  // Either title OR url must be provided
+  hasTitleOrUrl: boolean;
+  // Title is always required for chat analysis
+  isTitleRequired: boolean;
+  // URL is optional but can be used for auto-filling title
+  hasUrl: boolean;
 }
 
 /* ------------------------- Analyser Wrapper Types ------------------------- */
@@ -96,6 +107,7 @@ export interface AnalyserWrapperProps {
   getReportFormInitialData: () => ReportFormData;
   onSubmitReport: (reportId: string) => void;
   className?: string;
+  analysisType?: 'chat' | 'repo';
 }
 
 export interface AnalyserContentWrapperProps {
@@ -281,7 +293,7 @@ export interface Report {
   id?: string;
   type: ReportType;
   title?: string;
-  url: string;
+  url?: string; // Required for chat reports, optional for repo reports
   platform?: string;
   reason: string;
   reporterId?: string;

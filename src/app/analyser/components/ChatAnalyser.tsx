@@ -6,11 +6,7 @@ import { useT } from '@/lib/translations/TranslationsProvider';
 import { ocrImageToText } from '@/utils/ocr';
 import { useCallback, useState } from 'react';
 import { AnalyserContentWrapper, AnalyserWrapper } from './AnalyserWrapper';
-import {
-  ChatAnalyserProps,
-  ChatAnalysis,
-  ReportFormData,
-} from '@/types';
+import { ChatAnalyserProps, ChatAnalysis, ReportFormData } from '@/types';
 
 const BP = process.env.NEXT_PUBLIC_BASE_PATH || '';
 
@@ -105,6 +101,12 @@ export default function ChatAnalyser({ providerConfig }: ChatAnalyserProps) {
     if (!analysis) return {} as ReportFormData;
 
     const firstUrl = analysis.entities.urls?.[0] ?? '';
+
+    // Auto-fill title from first line of chat text
+    const firstLine = rawText.split('\n')[0].trim();
+    const title =
+      firstLine.length > 0 ? firstLine.substring(0, 100) : 'Chat Analysis';
+
     const aiReason = `Analysis Score: ${
       analysis.riskScore
     }/100\n\nFlags:\n${analysis.flags.join('\n')}\n\nSummary:\n${
@@ -113,6 +115,7 @@ export default function ChatAnalyser({ providerConfig }: ChatAnalyserProps) {
 
     return {
       url: firstUrl,
+      title,
       reason: aiReason,
       type: 'profile' as const,
       platform: 'Analyser',
@@ -127,6 +130,7 @@ export default function ChatAnalyser({ providerConfig }: ChatAnalyserProps) {
       onCancelReport={handleCancelReport}
       getReportFormInitialData={getReportFormInitialData}
       onSubmitReport={handleReportSubmit}
+      analysisType="chat"
     >
       {/* Input Section */}
       <AnalyserContentWrapper>

@@ -17,6 +17,7 @@ export function AnalyserWrapper({
   getReportFormInitialData,
   onSubmitReport,
   className = '',
+  analysisType,
 }: AnalyserWrapperProps) {
   const t = useT();
 
@@ -66,6 +67,7 @@ export function AnalyserWrapper({
             onCancel={onCancelReport}
             submitButtonText={t('analyser.reportForm.submitButton')}
             showHoneypot={false}
+            analysisType={analysisType}
           />
         </div>
       )}

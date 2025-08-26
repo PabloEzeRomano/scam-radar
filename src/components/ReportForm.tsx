@@ -15,6 +15,7 @@ export function ReportForm({
   submitButtonText,
   showHoneypot = true,
   className = '',
+  analysisType,
 }: ReportFormProps) {
   const t = useT();
   const [formData, setFormData] = useState<ReportFormData>({
@@ -42,14 +43,14 @@ export function ReportForm({
         if (!formData.title) {
           setFormData((prev) => ({
             ...prev,
-            title: deriveTitleFromUrl(formData.url),
+            title: deriveTitleFromUrl(formData.url!),
           }));
         }
 
         if (!formData.platform) {
           setFormData((prev) => ({
             ...prev,
-            platform: detectPlatform(formData.url),
+            platform: detectPlatform(formData.url!),
           }));
         }
       } catch {
@@ -70,9 +71,24 @@ export function ReportForm({
       newErrors.type = t('submit.validation.typeRequired') as ReportType;
     }
 
-    if (!formData.url) {
-      newErrors.url = t('submit.validation.urlRequired');
+    // For chat analysis: both title and URL are required
+    if (analysisType === 'chat') {
+      if (!formData.title) {
+        newErrors.title = t('submit.validation.titleRequiredForChat');
+      }
+      if (!formData.url) {
+        newErrors.url = t('submit.validation.urlRequiredForChat');
+      }
     } else {
+      // For repo analysis: either title OR url must be provided
+      if (!formData.title && !formData.url) {
+        newErrors.title = t('submit.validation.titleOrUrlRequired');
+        newErrors.url = t('submit.validation.titleOrUrlRequired');
+      }
+    }
+
+    // Validate URL if provided
+    if (formData.url) {
       const urlError = validateUrl(formData.url);
       if (urlError) {
         newErrors.url = t('submit.validation.urlInvalid');
@@ -104,12 +120,18 @@ export function ReportForm({
   };
 
   const disableSubmit = useMemo(() => {
-    return (
-      !formData.url ||
-      !formData.reason ||
-      (!formData.email && !formData.linkedin)
-    );
-  }, [formData]);
+    const hasRequiredFields =
+      formData.reason && (formData.email || formData.linkedin);
+
+    // For chat analysis: both title and URL are required
+    if (analysisType === 'chat') {
+      return !formData.title || !formData.url || !hasRequiredFields;
+    }
+
+    // For repo analysis: either title OR url must be provided
+    const hasTitleOrUrl = formData.title || formData.url;
+    return !hasTitleOrUrl || !hasRequiredFields;
+  }, [formData, analysisType]);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -129,7 +151,7 @@ export function ReportForm({
       });
 
       const report = await reportServices.createReport({
-        url: formData.url,
+        url: formData.url || '', // Provide empty string if no URL
         title: formData.title,
         type: formData.type,
         reason: formData.reason,
@@ -157,7 +179,9 @@ export function ReportForm({
   };
 
   return (
-    <div className={`bg-white rounded-lg shadow-sm border border-gray-200 p-6 ${className}`}>
+    <div
+      className={`bg-white rounded-lg shadow-sm border border-gray-200 p-6 ${className}`}
+    >
       <form onSubmit={handleSubmit} className="space-y-6">
         {/* Honeypot field - hidden from users but visible to bots */}
         {showHoneypot && (
@@ -198,11 +222,12 @@ export function ReportForm({
             label={t('submit.form.url')}
             name="url"
             type="url"
-            required
             placeholder={t('submit.form.urlPlaceholder')}
             value={formData.url}
             onChange={(value) => handleInputChange('url', value)}
             error={errors.url}
+            required={analysisType === 'chat'}
+            optional={analysisType !== 'chat'}
           />
         </div>
 
@@ -213,6 +238,8 @@ export function ReportForm({
             placeholder={t('submit.form.titlePlaceholder')}
             value={formData.title}
             onChange={(value) => handleInputChange('title', value)}
+            error={errors.title}
+            required={analysisType === 'chat'}
           />
 
           <FormField
@@ -297,7 +324,7 @@ export function ReportForm({
           <button
             type="submit"
             disabled={isSubmitting || disableSubmit}
-            className="inline-flex items-center px-6 py-3 border border-transparent text-base font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 disabled:opacity-60 disabled:cursor-not-allowed transition-colors"
+            className="inline-flex items-center px-6 py-2 border border-transparent text-base font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 disabled:opacity-60 disabled:cursor-not-allowed transition-colors"
           >
             {isSubmitting ? (
               <>

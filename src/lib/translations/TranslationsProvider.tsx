@@ -1,14 +1,14 @@
 'use client';
 
-import React, {
+import {
   createContext,
-  useContext,
-  useState,
-  useEffect,
   ReactNode,
+  useContext,
+  useEffect,
+  useState,
 } from 'react';
-import { Locale, TranslationDictionary, Translations } from './types';
 import dictionaryData from './dictionary.json';
+import { Locale, TranslationDictionary } from './types';
 
 interface TranslationsContextType {
   locale: Locale;

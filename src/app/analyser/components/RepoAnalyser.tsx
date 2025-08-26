@@ -5,11 +5,7 @@ import { FormField } from '@/components/FormField';
 import { useT } from '@/lib/translations/TranslationsProvider';
 import { useCallback, useState } from 'react';
 import { AnalyserContentWrapper, AnalyserWrapper } from './AnalyserWrapper';
-import {
-  RepoAnalyserProps,
-  RepoAnalysis,
-  ReportFormData,
-} from '@/types';
+import { RepoAnalyserProps, RepoAnalysis, ReportFormData } from '@/types';
 
 const BP = process.env.NEXT_PUBLIC_BASE_PATH || '';
 
@@ -98,8 +94,14 @@ export default function RepoAnalyser({ providerConfig }: RepoAnalyserProps) {
       analysis.summary
     }`;
 
+    // Auto-fill title from zip filename if no URL provided
+    const title =
+      repoUrl ||
+      (zipFile ? zipFile.name.replace('.zip', '') : 'Repository Analysis');
+
     return {
       url: repoUrl,
+      title,
       reason: aiReason,
       type: 'project' as const,
       platform: 'Analyser',
@@ -114,6 +116,7 @@ export default function RepoAnalyser({ providerConfig }: RepoAnalyserProps) {
       onCancelReport={handleCancelReport}
       getReportFormInitialData={getReportFormInitialData}
       onSubmitReport={handleReportSubmit}
+      analysisType="repo"
     >
       <AnalyserContentWrapper>
         <h2 className="text-xl font-semibold text-gray-900 mb-4">
